@@ -904,7 +904,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   async function handleSignup(e, successId) {
     e.preventDefault();
 
@@ -920,20 +920,11 @@
     btn.textContent = 'Submitting...';
 
     try {
-      const res = await fetch(
-        'https://api.beehiiv.com/v2/publications/77b8f3d9-1af7-4a02-b25b-1074dffed6ee/subscriptions',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: email,
-            reactivate_existing: false,
-            send_welcome_email: true,
-            utm_source: 'website',
-            utm_medium: 'waitlist_form'
-          })
-        }
-      );
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
 
       successEl.style.display = 'block';
       emailInput.value = '';
