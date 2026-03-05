@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Barakah Trading</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8CC7A;
+      --dark: #0A0A0A;
+      --dark2: #111111;
+      --dark4: #222222;
+      --text: #F0EDE6;
+      --text-muted: #B8B4AE;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: .5;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-wordmark {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .82rem;
+      letter-spacing: .06em;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--gold) !important;
+      color: #0A0A0A !important;
+      padding: .5rem 1.3rem;
+      border-radius: 3px;
+      font-weight: 500 !important;
+      letter-spacing: .06em;
+    }
+
+    /* PAGE */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 2rem 5rem;
+    }
+
+    .contact-inner {
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .section-label {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: .95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    /* FORM */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: .9rem 1.1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+      width: 100%;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #555;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0A0A0A;
+      border: none;
+      padding: .9rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+      align-self: flex-start;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-gold:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .success-msg {
+      display: none;
+      color: #3ECF8E;
+      font-size: .88rem;
+      margin-top: .75rem;
+    }
+
+    .divider-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+      margin: 2.5rem 0;
+    }
+
+    .contact-info {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .contact-info-label {
+      font-size: .7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .contact-info-value {
+      font-size: .88rem;
+      color: var(--text-muted);
+    }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer p { font-size: .8rem; color: var(--text-muted); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      font-size: .8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: .04em;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      .contact-row { grid-template-columns: 1fr; }
+      .section-title { font-size: 2rem; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .contact-info { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">
+    <svg width="28" height="28" viewBox="0 0 62 62" fill="none">
+      <circle cx="31" cy="31" r="23" fill="#C9A84C"/>
+      <circle cx="40" cy="25" r="19" fill="#0A0A0A"/>
+      <polyline points="8,52 14,44 20,48 28,34 34,38 46,20" stroke="#F0EDE6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polygon points="52,11 51,23 41,17" fill="#F0EDE6"/>
+    </svg>
+    <span class="logo-wordmark">BARAKAH</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#features">Features</a></li>
+    <li><a href="/#pricing">Pricing</a></li>
+    <li><a href="/#how">How It Works</a></li>
+    <li><a href="/#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN -->
+<div class="page-wrapper">
+  <div class="contact-inner">
+
+    <span class="section-label">Get In Touch</span>
+    <h1 class="section-title">We're here<br>to help.</h1>
+    <p class="section-sub">Have a question, suggestion, or just want to learn more? Send us a message and we'll get back to you within 3 business days.</p>
+
+    <form class="contact-form" onsubmit="handleContact(event)">
+      <div class="contact-row">
+        <input type="text" placeholder="Your name" id="contact-name" required/>
+        <input type="email" placeholder="Your email" id="contact-email" required/>
+      </div>
+      <input type="text" placeholder="Subject" id="contact-subject" required/>
+      <textarea placeholder="Your message..." id="contact-message" rows="5" required></textarea>
+      <button type="submit" class="btn-gold" id="contact-btn">Send Message</button>
+    </form>
+    <p class="success-msg" id="contact-success">✓ Message sent! We'll be in touch within 3 business days.</p>
+
+    <div class="divider-line"></div>
+
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <span class="contact-info-label">Email</span>
+        <span class="contact-info-value">support&#64;barakahtrading&#46;co</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label">Response Time</span>
+        <span class="contact-info-value">Within 3 business days</span>
+      </div>
+      <div class="contact-info-item">
+        <span class="contact-info-label">Based In</span>
+        <span class="contact-info-value">Florida, USA</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">
+    <svg width="28" height="28" viewBox="0 0 62 62" fill="none">
+      <circle cx="31" cy="31" r="23" fill="#C9A84C"/>
+      <circle cx="40" cy="25" r="19" fill="#0A0A0A"/>
+      <polyline points="8,52 14,44 20,48 28,34 34,38 46,20" stroke="#F0EDE6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polygon points="52,11 51,23 41,17" fill="#F0EDE6"/>
+    </svg>
+    <span class="logo-wordmark">BARAKAH</span>
+  </div>
+  <p>© 2025 Barakah Trading LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="/contact">Contact</a>
+  </div>
+</footer>
+
+<script src="./contact.js" defer></script>
+</body>
+</html>
