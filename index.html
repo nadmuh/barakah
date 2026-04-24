@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barakah — Trade Smarter. Learn Faster.</title>
+  <link rel="icon" type="image/png" id="favicon" href="favicon-dark.png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold:         #C9A84C;
+      --gold-light:   #E8CC7A;
+      --gold-dim:     #7a6330;
+      --gold-glow:    rgba(201,168,76,0.15);
+      --cyan:         #00D4FF;
+      --cyan-dim:     rgba(0,212,255,0.08);
+      --dark:         #0B0E14;
+      --dark2:        #0F1218;
+      --dark3:        #131720;
+      --dark4:        #1A1F2B;
+      --glass:        rgba(255,255,255,0.035);
+      --glass-border: rgba(255,255,255,0.08);
+      --glass-gold:   rgba(201,168,76,0.12);
+      --text:         #EAE8F0;
+      --text-muted:   #5A5E6E;
+      --green:        #00E5A0;
+      --red:          #FF4D6A;
+      --border:       rgba(255,255,255,0.05);
+      --nav-h:        68px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── GRAIN ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: .7;
+    }
+
+    /* ── AMBIENT ORBS ── */
+    .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; transition: transform 1.2s ease; }
+    .orb-1 { width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%); top: -250px; left: -250px; }
+    .orb-2 { width: 650px; height: 650px; background: radial-gradient(circle, rgba(0,212,255,0.055) 0%, transparent 70%); top: 25%; right: -180px; animation: orbFloat 11s ease-in-out infinite; }
+    .orb-3 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(201,168,76,0.045) 0%, transparent 70%); bottom: 5%; left: 15%; animation: orbFloat 15s ease-in-out infinite reverse; }
+    .orb-4 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0,212,255,0.035) 0%, transparent 70%); bottom: 30%; right: 5%; animation: orbFloat 9s ease-in-out infinite 3s; }
+
+    @keyframes orbFloat { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-50px) } }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp    { from { opacity:0; transform:translateY(32px) } to { opacity:1; transform:translateY(0) } }
+    @keyframes fadeIn    { from { opacity:0 } to { opacity:1 } }
+    @keyframes slideLeft { from { opacity:0; transform:translateX(-28px) } to { opacity:1; transform:translateX(0) } }
+    @keyframes slideRight{ from { opacity:0; transform:translateX(28px) } to { opacity:1; transform:translateX(0) } }
+    @keyframes scaleIn   { from { opacity:0; transform:scale(.92) } to { opacity:1; transform:scale(1) } }
+    @keyframes pulse     { 0%,100%{ opacity:1; transform:scale(1) } 50%{ opacity:.4; transform:scale(1.6) } }
+    @keyframes scanLine  { 0%{ top:-100% } 100%{ top:200% } }
+    @keyframes shimmer   { 0%{ background-position:-200% 0 } 100%{ background-position:200% 0 } }
+    @keyframes borderSpin{ 0%{ transform:rotate(0deg) } 100%{ transform:rotate(360deg) } }
+    @keyframes chartDraw { from{ stroke-dashoffset:2000 } to{ stroke-dashoffset:0 } }
+    @keyframes countUp   { from{ opacity:0; transform:translateY(12px) } to{ opacity:1; transform:translateY(0) } }
+    @keyframes iconFloat { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-5px) } }
+    @keyframes glowPulse { 0%,100%{ opacity:.35 } 50%{ opacity:.65 } }
+    @keyframes stepReveal{ from{ opacity:0; transform:translateY(20px) scale(.97) } to{ opacity:1; transform:translateY(0) scale(1) } }
+    @keyframes connectorGrow { from{ width:0; opacity:0 } to{ width:100%; opacity:1 } }
+    @keyframes tagBlink  { 0%,100%{ opacity:1 } 50%{ opacity:.5 } }
+    @keyframes gradientShift { 0%,100%{ background-position:0% 50% } 50%{ background-position:100% 50% } }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:500;
+      height: var(--nav-h);
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 0 5vw;
+      background: rgba(11,14,20,0.7);
+      backdrop-filter: blur(24px) saturate(1.5);
+      -webkit-backdrop-filter: blur(24px) saturate(1.5);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background .4s, border-color .4s;
+    }
+    nav.scrolled { background: rgba(5,7,12,0.96); border-bottom-color: rgba(201,168,76,0.2); }
+
+    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0; }
+    .logo-wordmark {
+      font-family: 'Orbitron', sans-serif;
+      font-size:.78rem; font-weight:700; letter-spacing:.2em;
+      color: var(--gold); text-transform:uppercase;
+    }
+
+    .nav-links { display:flex; align-items:center; gap:2rem; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration:none;
+      font-family:'Outfit',sans-serif; font-weight:400;
+      font-size:.82rem; letter-spacing:.08em; text-transform:uppercase;
+      transition:color .2s; position:relative; white-space:nowrap;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:1px;
+      background: linear-gradient(90deg, var(--gold), var(--cyan));
+      transition: width .3s ease;
+    }
+    .nav-links a:hover { color:var(--text); }
+    .nav-links a:hover::after { width:100%; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), #B8962E) !important;
+      color: var(--dark) !important; padding:.45rem 1.3rem !important;
+      border-radius:4px; font-weight:600 !important; letter-spacing:.1em !important;
+      transition: all .2s !important;
+    }
+    .nav-cta::after { display:none !important; }
+    .nav-cta:hover { transform:translateY(-1px); box-shadow:0 4px 20px rgba(201,168,76,0.4) !important; }
+
+    .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none; padding:.3rem; }
+    .hamburger span { display:block; width:22px; height:1.5px; background:var(--text-muted); transition:all .3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); background:var(--gold); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); background:var(--gold); }
+
+    .mobile-menu {
+      display:none; position:fixed; inset:0;
+      background:rgba(11,14,20,.97); z-index:400;
+      flex-direction:column; align-items:center; justify-content:center; gap:2.5rem;
+    }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-family:'Orbitron',sans-serif; font-size:1.4rem; color:var(--text); text-decoration:none; letter-spacing:.1em; transition:color .2s; }
+    .mobile-menu a:hover { color:var(--gold); }
+    .mobile-menu .m-cta { font-family:'Outfit',sans-serif !important; font-size:.9rem !important; background:linear-gradient(135deg,var(--gold),#B8962E); color:var(--dark) !important; padding:.75rem 2.5rem; border-radius:4px; letter-spacing:.1em; text-transform:uppercase; font-weight:600 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center;
+      padding: calc(var(--nav-h) + 4rem) 5vw 5rem;
+      position:relative; overflow:hidden; z-index:1;
+    }
+
+    .hero-glow {
+      position:absolute; width:800px; height:800px;
+      background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 65%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      pointer-events:none; animation:glowPulse 4s ease-in-out infinite;
+    }
+    .hero-glow-cyan {
+      position:absolute; width:500px; height:500px;
+      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 65%);
+      top:30%; right:5%; pointer-events:none;
+      animation:glowPulse 6s ease-in-out infinite 2s;
+    }
+
+    /* Animated grid background */
+    .hero-grid {
+      position:absolute; inset:0; pointer-events:none;
+      background-image:
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+    }
+
+    .tag {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(201,168,76,0.08);
+      border:1px solid rgba(201,168,76,0.22);
+      color:var(--gold);
+      font-family:'JetBrains Mono',monospace;
+      font-size:.68rem; letter-spacing:.18em; text-transform:uppercase;
+      padding:.4rem 1.1rem; border-radius:100px;
+      margin-bottom:2rem;
+      animation: fadeUp .8s ease both;
+    }
+    .tag-dot { width:6px; height:6px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; }
+
+    h1 {
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(2.4rem,6vw,5.2rem);
+      font-weight:700; line-height:1.08; letter-spacing:.02em;
+      margin-bottom:1.5rem;
+      animation: fadeUp .9s .1s ease both;
+    }
+    h1 em { font-style:normal; color:var(--gold); }
+
+    .hero-sub {
+      max-width:560px; font-size:1rem; line-height:1.85;
+      color:var(--text-muted); margin-bottom:1.9rem;
+      animation: fadeUp 1s .2s ease both;
+    }
+
+    .hero-form {
+      display:flex; gap:.75rem; width:100%; max-width:460px;
+      animation: fadeUp 1s .3s ease both;
+    }
+    .hero-form input {
+      flex:1; background:var(--glass); border:1px solid var(--glass-border);
+      color:var(--text); font-family:'Outfit',sans-serif; font-size:.92rem;
+      padding:.85rem 1.2rem; border-radius:6px; outline:none;
+      transition:border-color .2s, background .2s, box-shadow .2s;
+    }
+    .hero-form input::placeholder { color:var(--text-muted); }
+    .hero-form input:focus { border-color:rgba(201,168,76,0.45); background:rgba(255,255,255,0.05); box-shadow:0 0 0 3px rgba(201,168,76,0.08); }
+
+    .btn-gold {
+      background:linear-gradient(135deg,var(--gold),#B8962E);
+      color:var(--dark); border:none;
+      font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:600;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:.85rem 1.6rem; border-radius:6px; cursor:pointer; white-space:nowrap;
+      transition:all .25s; position:relative; overflow:hidden;
+    }
+    .btn-gold::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+      opacity:0; transition:opacity .2s;
+    }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(201,168,76,0.45); }
+    .btn-gold:hover::before { opacity:1; }
+    .btn-gold:active { transform:translateY(0); }
+
+    .btn-join-waitlist {
+      background: linear-gradient(135deg, var(--gold), #B8962E);
+      color: var(--dark); border: none;
+      font-family: 'Outfit', sans-serif; font-size: .85rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: .75rem 2rem; border-radius: 6px; cursor: pointer;
+      position: relative; overflow: hidden;
+      margin-bottom: .35rem;
+      animation: fadeUp 1s .3s ease both;
+      box-shadow: 0 0 28px rgba(201,168,76,0.45), 0 0 60px rgba(201,168,76,0.2);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn-join-waitlist::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+      opacity: 0; transition: opacity .2s;
+    }
+    .btn-join-waitlist:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(201,168,76,0.65), 0 0 80px rgba(201,168,76,0.3);
+    }
+    .btn-join-waitlist:hover::before { opacity: 1; }
+    .btn-join-waitlist:active { transform: translateY(0); }
+    @keyframes goldGlow {
+      0%, 100% { box-shadow: 0 0 28px rgba(201,168,76,0.45), 0 0 60px rgba(201,168,76,0.2); }
+      50%       { box-shadow: 0 0 42px rgba(201,168,76,0.7),  0 0 90px rgba(201,168,76,0.35); }
+    }
+    .btn-join-waitlist { animation: fadeUp 1s .3s ease both, goldGlow 2.8s ease-in-out 1.3s infinite; }
+
+    .hero-note {
+      margin-top:1rem;
+      font-family:'JetBrains Mono',monospace; font-size:.72rem;
+      color:var(--text-muted); letter-spacing:.06em;
+      animation: fadeUp 1s .4s ease both;
+    }
+
+    .hero-stats {
+      display:flex; gap:3.5rem; margin-top:4.5rem;
+      animation: fadeUp 1s .55s ease both;
+    }
+    .stat-item { text-align:center; }
+    .stat-row {
+      display:flex; align-items:baseline; justify-content:center; gap:.15rem;
+    }
+    .stat-num {
+      font-family:'Orbitron',sans-serif; font-size:1.8rem; font-weight:700;
+      color:var(--gold);
+    }
+    .stat-suffix {
+      font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:600;
+      color:var(--gold);
+    }
+    .stat-label {
+      font-family:'JetBrains Mono',monospace; font-size:.65rem;
+      color:var(--text-muted); letter-spacing:.1em; text-transform:uppercase;
+    }
+
+    /* Animated chart line */
+    .hero-chart {
+      position:absolute; bottom:0; left:0; right:0; height:200px;
+      opacity:.06; overflow:hidden; pointer-events:none;
+    }
+    .hero-chart polyline {
+      stroke-dasharray:2000;
+      stroke-dashoffset:2000;
+      animation: chartDraw 3s 1s ease forwards;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width:100%; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(201,168,76,0.2),transparent);
+      position:relative; z-index:1;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding:7rem 5vw; position:relative; z-index:1; }
+
+    .section-label {
+      font-family:'JetBrains Mono',monospace;
+      font-size:.62rem; letter-spacing:.3em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:1rem; display:block; opacity:.9;
+    }
+    .section-title {
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(1.7rem,3.5vw,2.8rem);
+      font-weight:700; line-height:1.15; letter-spacing:.02em; margin-bottom:1.2rem;
+    }
+    .section-sub { color:var(--text-muted); font-size:.95rem; line-height:1.8; max-width:520px; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left  { opacity:0; transform:translateX(-28px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal-left.visible  { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(28px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal-right.visible { opacity:1; transform:translateX(0); }
+    .reveal-scale { opacity:0; transform:scale(.94); transition:opacity .6s ease, transform .6s ease; }
+    .reveal-scale.visible { opacity:1; transform:scale(1); }
+
+    /* ── PROBLEM ── */
+    .problem { background:var(--dark2); display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+
+    .problem-list { list-style:none; margin-top:2.5rem; display:flex; flex-direction:column; gap:1.2rem; }
+    .problem-list li {
+      display:flex; gap:1rem; align-items:flex-start;
+      font-size:.92rem; line-height:1.65; color:var(--text-muted);
+      padding:.75rem 1rem;
+      background:rgba(255,77,106,0.04); border:1px solid rgba(255,77,106,0.08);
+      border-radius:6px; transition:border-color .2s;
+    }
+    .problem-list li:hover { border-color:rgba(255,77,106,0.18); }
+    .problem-list li .x-icon { flex-shrink:0; margin-top:.1rem; }
+
+    .solution-card {
+      background:var(--glass); border:1px solid var(--glass-gold);
+      border-radius:14px; padding:2.5rem; position:relative; overflow:hidden;
+    }
+    .solution-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--gold),var(--cyan),transparent);
+    }
+    /* Scan line */
+    .solution-card::after {
+      content:''; position:absolute; left:0; right:0; height:60px;
+      background:linear-gradient(180deg,transparent,rgba(201,168,76,0.04),transparent);
+      animation: scanLine 5s linear infinite;
+    }
+    .solution-card h3 {
+      font-family:'Orbitron',sans-serif; font-size:1.3rem; font-weight:700;
+      margin-bottom:1.2rem; color:var(--gold); letter-spacing:.04em; position:relative; z-index:1;
+    }
+    .solution-card p { color:var(--text-muted); line-height:1.8; font-size:.92rem; position:relative; z-index:1; }
+    .solution-byline {
+      color:var(--gold); font-size:.78rem; font-family:'JetBrains Mono',monospace;
+      letter-spacing:.1em; margin-top:1.2rem; display:block; position:relative; z-index:1;
+    }
+
+    /* ── FEATURES ── */
+    .features { text-align:center; }
+    .features-header { margin-bottom:4rem; }
+
+    .features-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+      max-width:1100px; margin:0 auto;
+    }
+
+    .feature-card {
+      background:var(--glass); border:1px solid var(--glass-border);
+      border-radius:12px; padding:2rem; text-align:left;
+      transition:border-color .3s, transform .3s, background .3s, box-shadow .3s;
+      position:relative; overflow:hidden;
+    }
+    .feature-card::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(circle at top left,rgba(201,168,76,0.07),transparent 55%);
+      opacity:0; transition:opacity .3s;
+    }
+    .feature-card:hover { border-color:rgba(201,168,76,0.3); transform:translateY(-5px); background:rgba(255,255,255,0.05); box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(201,168,76,0.1); }
+    .feature-card:hover::before { opacity:1; }
+
+    .feature-icon-wrap {
+      width:48px; height:48px; border-radius:10px;
+      background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.18);
+      display:flex; align-items:center; justify-content:center;
+      margin-bottom:1.1rem; transition:all .3s; flex-shrink:0;
+    }
+    .feature-card:hover .feature-icon-wrap {
+      background:rgba(201,168,76,0.14); border-color:rgba(201,168,76,0.32);
+      animation:iconFloat 2s ease-in-out infinite;
+    }
+    .feature-icon-wrap svg { width:22px; height:22px; color:var(--gold); }
+
+    .feature-card h4 {
+      font-family:'Orbitron',sans-serif; font-size:.82rem; font-weight:600;
+      letter-spacing:.08em; margin-bottom:.6rem; color:var(--text);
+    }
+    .feature-card p { font-size:.875rem; color:var(--text-muted); line-height:1.72; }
+
+    /* ── HOW IT WORKS ── */
+    .how { background:var(--dark2); }
+    .how-header { text-align:center; margin-bottom:3.5rem; }
+
+    .steps-wrap {
+      max-width:960px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:1rem;
+      position:relative;
+      isolation:isolate; /* establishes a stacking context so z-index layers work correctly */
+    }
+
+    /*
+      Connector line math:
+        - 4 equal cols with 3 × 1rem gaps → each col = calc((100% - 3rem) / 4)
+        - Center of col 1 from left  = calc((100% - 3rem) / 8)
+        - Center of col 4 from right = calc((100% - 3rem) / 8)  (symmetric)
+        - top = step padding-top (1.2rem) + half icon height (38px)
+    */
+    .steps-connector {
+      position:absolute;
+      top: calc(1.2rem + 38px);
+      left:  calc((100% - 3rem) / 8);
+      right: calc((100% - 3rem) / 8);
+      height:1px;
+      z-index:0; /* behind steps (z-index:1) */
+      pointer-events:none;
+    }
+    /* The static gradient line */
+    .steps-connector::before {
+      content:''; display:block; height:100%;
+      background:linear-gradient(90deg, transparent, rgba(201,168,76,0.4) 15%, rgba(0,212,255,0.3) 50%, rgba(201,168,76,0.4) 85%, transparent);
+    }
+    /* Traveling dot — uses top:calc so transform is free for scale */
+    .steps-connector::after {
+      content:''; position:absolute;
+      top: calc(50% - 3.5px); /* vertically centered without transform */
+      width:7px; height:7px; border-radius:50%;
+      background:var(--gold);
+      animation: travelDot 9s ease-in-out infinite;
+    }
+
+    /*
+      Dot stops at each circle center:
+        C1 = left: -3.5px  (0%  of connector)
+        C2 = left: calc(33.33% - 3.5px)
+        C3 = left: calc(66.67% - 3.5px)
+        C4 = left: calc(100% - 3.5px)
+      Glow burst = scale(2.8) + large box-shadow
+      Timeline (9s total):
+        0–5%    fade-in, arrive C1
+        5–16%   glow at C1
+        22–27%  arrive C2
+        27–38%  glow at C2
+        44–49%  arrive C3
+        49–60%  glow at C3
+        66–71%  arrive C4
+        71–82%  glow at C4
+        86–90%  fade out
+        91–100% invisible reset to C1
+    */
+    @keyframes travelDot {
+      0%   { left:-3.5px; opacity:0; transform:scale(1); box-shadow:none; }
+      5%   { left:-3.5px; opacity:1; transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.7); }
+      10%  { left:-3.5px; transform:scale(2.8); box-shadow:0 0 0 4px rgba(201,168,76,0.12), 0 0 14px rgba(201,168,76,1), 0 0 28px rgba(201,168,76,0.5); }
+      16%  { left:-3.5px; transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.5); }
+      22%  { left:calc(33.33% - 3.5px); transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.7); }
+      27%  { left:calc(33.33% - 3.5px); transform:scale(1); }
+      32%  { left:calc(33.33% - 3.5px); transform:scale(2.8); box-shadow:0 0 0 4px rgba(201,168,76,0.12), 0 0 14px rgba(201,168,76,1), 0 0 28px rgba(201,168,76,0.5); }
+      38%  { left:calc(33.33% - 3.5px); transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.5); }
+      44%  { left:calc(66.67% - 3.5px); transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.7); }
+      49%  { left:calc(66.67% - 3.5px); transform:scale(1); }
+      54%  { left:calc(66.67% - 3.5px); transform:scale(2.8); box-shadow:0 0 0 4px rgba(201,168,76,0.12), 0 0 14px rgba(201,168,76,1), 0 0 28px rgba(201,168,76,0.5); }
+      60%  { left:calc(66.67% - 3.5px); transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.5); }
+      66%  { left:calc(100% - 3.5px); transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.7); }
+      71%  { left:calc(100% - 3.5px); transform:scale(1); }
+      76%  { left:calc(100% - 3.5px); transform:scale(2.8); box-shadow:0 0 0 4px rgba(201,168,76,0.12), 0 0 14px rgba(201,168,76,1), 0 0 28px rgba(201,168,76,0.5); }
+      82%  { left:calc(100% - 3.5px); transform:scale(1); box-shadow:0 0 6px rgba(201,168,76,0.5); opacity:1; }
+      88%  { left:calc(100% - 3.5px); opacity:0; transform:scale(1); }
+      89%  { left:-3.5px; opacity:0; }
+      100% { left:-3.5px; opacity:0; }
+    }
+
+    /* Each circle glows in sync with the dot's arrival ── same 9s loop */
+    @keyframes stepPulse1 {
+      0%,4%  { border-color:rgba(201,168,76,0.22); box-shadow:none; }
+      10%    { border-color:rgba(201,168,76,0.75); box-shadow:0 0 0 3px rgba(201,168,76,0.1), 0 0 22px rgba(201,168,76,0.35); }
+      17%,100%{ border-color:rgba(201,168,76,0.22); box-shadow:none; }
+    }
+    @keyframes stepPulse2 {
+      0%,21% { border-color:rgba(201,168,76,0.22); box-shadow:none; }
+      32%    { border-color:rgba(201,168,76,0.75); box-shadow:0 0 0 3px rgba(201,168,76,0.1), 0 0 22px rgba(201,168,76,0.35); }
+      39%,100%{ border-color:rgba(201,168,76,0.22); box-shadow:none; }
+    }
+    @keyframes stepPulse3 {
+      0%,43% { border-color:rgba(201,168,76,0.22); box-shadow:none; }
+      54%    { border-color:rgba(201,168,76,0.75); box-shadow:0 0 0 3px rgba(201,168,76,0.1), 0 0 22px rgba(201,168,76,0.35); }
+      61%,100%{ border-color:rgba(201,168,76,0.22); box-shadow:none; }
+    }
+    @keyframes stepPulse4 {
+      0%,65% { border-color:rgba(201,168,76,0.22); box-shadow:none; }
+      76%    { border-color:rgba(201,168,76,0.75); box-shadow:0 0 0 3px rgba(201,168,76,0.1), 0 0 22px rgba(201,168,76,0.35); }
+      83%,100%{ border-color:rgba(201,168,76,0.22); box-shadow:none; }
+    }
+    /* steps-connector is first child, so steps are nth-child 2–5 */
+    .steps-wrap > .step:nth-child(2) .step-icon-wrap { animation:stepPulse1 9s ease-in-out infinite; }
+    .steps-wrap > .step:nth-child(3) .step-icon-wrap { animation:stepPulse2 9s ease-in-out infinite; }
+    .steps-wrap > .step:nth-child(4) .step-icon-wrap { animation:stepPulse3 9s ease-in-out infinite; }
+    .steps-wrap > .step:nth-child(5) .step-icon-wrap { animation:stepPulse4 9s ease-in-out infinite; }
+    /* Pause pulse on hover */
+    .step:hover .step-icon-wrap { animation:none; background:color-mix(in srgb, var(--dark2) 80%, rgba(201,168,76,0.2)); border-color:transparent; box-shadow:0 0 22px rgba(201,168,76,0.22); }
+
+    .step {
+      padding:1.2rem 1rem 1.5rem; text-align:center;
+      position:relative; z-index:1; /* above connector */
+    }
+
+    .step-icon-wrap {
+      width:76px; height:76px; border-radius:50%; margin:0 auto 1.2rem;
+      /* Solid section background — hides the line passing through the center */
+      background: var(--dark2);
+      border:1px solid rgba(201,168,76,0.22);
+      display:flex; align-items:center; justify-content:center;
+      position:relative; z-index:2;
+      transition:background .3s, border-color .3s, box-shadow .3s;
+    }
+
+    .step-icon-wrap svg { width:26px; height:26px; color:var(--gold); transition:transform .3s; }
+    .step:hover .step-icon-wrap svg { transform:scale(1.1); }
+
+    .step-num-badge {
+      position:absolute; top:-2px; right:-2px;
+      width:20px; height:20px; border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),#B8962E);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Orbitron',sans-serif; font-size:.5rem; font-weight:700;
+      color:var(--dark); line-height:1;
+    }
+
+    .step h4 {
+      font-family:'Orbitron',sans-serif; font-size:.75rem; font-weight:600;
+      letter-spacing:.1em; margin-bottom:.45rem; color:var(--text);
+    }
+    .step p { font-size:.82rem; color:var(--text-muted); line-height:1.65; }
+
+    /* ── PRICING ── */
+    .tiers { }
+    .tiers-header { text-align:center; margin-bottom:4rem; }
+    .tiers-header .section-sub { margin:0 auto; }
+
+    .tiers-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+      max-width:1000px; margin:0 auto;
+    }
+
+    .tier-card {
+      background:var(--glass); border:1px solid var(--glass-border);
+      border-radius:14px; padding:2.5rem 2rem; position:relative;
+      transition:transform .3s, border-color .3s, box-shadow .3s;
+      display:flex; flex-direction:column;
+    }
+    .tier-card:hover { transform:translateY(-5px); }
+    .tier-card.featured {
+      border-color:rgba(201,168,76,0.4);
+      background:linear-gradient(160deg,rgba(201,168,76,0.07),var(--glass));
+      box-shadow:0 0 40px rgba(201,168,76,0.08);
+    }
+    .tier-card.featured:hover { box-shadow:0 12px 48px rgba(201,168,76,0.18); }
+
+    .tier-badge {
+      position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+      background:linear-gradient(135deg,var(--gold),#B8962E);
+      color:var(--dark); font-family:'JetBrains Mono',monospace;
+      font-size:.6rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+      padding:.28rem .9rem; border-radius:0 0 6px 6px;
+    }
+
+    .tier-name { font-family:'JetBrains Mono',monospace; font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.5rem; }
+    .tier-price { font-family:'Orbitron',sans-serif; font-size:2.6rem; font-weight:700; color:var(--text); line-height:1; margin-bottom:.25rem; }
+    .tier-price span { font-family:'Outfit',sans-serif; font-size:1rem; font-weight:300; color:var(--text-muted); }
+    .tier-desc { font-size:.85rem; color:var(--text-muted); margin-bottom:2rem; line-height:1.6; }
+
+    .tier-features { list-style:none; display:flex; flex-direction:column; gap:.75rem; margin-bottom:2rem; }
+    .tier-features li { display:flex; gap:.7rem; font-size:.875rem; color:var(--text-muted); align-items:flex-start; }
+    .tier-features li .check { flex-shrink:0; margin-top:.05rem; }
+
+    .btn-outline {
+      width:100%; background:transparent; border:1px solid rgba(201,168,76,0.35);
+      color:var(--gold); font-family:'Outfit',sans-serif; font-size:.85rem; font-weight:500;
+      letter-spacing:.08em; text-transform:uppercase; padding:.85rem; border-radius:6px;
+      cursor:pointer; transition:all .2s;
+      margin-top:auto;
+    }
+    .btn-outline:hover { background:rgba(201,168,76,0.08); border-color:rgba(201,168,76,0.55); }
+    .tier-card.featured .btn-outline {
+      background:linear-gradient(135deg,var(--gold),#B8962E); color:var(--dark); border-color:transparent;
+    }
+    .tier-card.featured .btn-outline:hover { box-shadow:0 4px 20px rgba(201,168,76,0.35); transform:translateY(-1px); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background:linear-gradient(135deg,var(--dark3),var(--dark));
+      border-top:1px solid rgba(201,168,76,0.1); border-bottom:1px solid rgba(201,168,76,0.1);
+      text-align:center; position:relative; overflow:hidden;
+    }
+    .cta-glow {
+      position:absolute; width:700px; height:700px; border-radius:50%;
+      background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 60%);
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      pointer-events:none; animation:glowPulse 5s ease-in-out infinite;
+    }
+    .cta-glow-cyan {
+      position:absolute; width:400px; height:400px; border-radius:50%;
+      background:radial-gradient(circle,rgba(0,212,255,0.04) 0%,transparent 65%);
+      top:10%; right:8%; pointer-events:none; animation:glowPulse 7s ease-in-out infinite 2s;
+    }
+
+    .cta-section h2 {
+      font-family:'Orbitron',sans-serif; font-size:clamp(1.6rem,4vw,3rem);
+      font-weight:700; letter-spacing:.03em; margin-bottom:1.2rem;
+      position:relative; z-index:1;
+    }
+    .cta-section > p { color:var(--text-muted); font-size:.95rem; margin-bottom:2.5rem; position:relative; z-index:1; }
+
+    .cta-form {
+      display:flex; gap:.75rem; justify-content:center; max-width:460px;
+      margin:0 auto 1rem; position:relative; z-index:1;
+    }
+    .cta-form input {
+      flex:1; background:var(--glass); border:1px solid var(--glass-border);
+      color:var(--text); font-family:'Outfit',sans-serif; font-size:.92rem;
+      padding:.85rem 1.2rem; border-radius:6px; outline:none;
+      transition:border-color .2s,background .2s,box-shadow .2s;
+    }
+    .cta-form input::placeholder { color:var(--text-muted); }
+    .cta-form input:focus { border-color:rgba(201,168,76,0.45); background:rgba(255,255,255,0.05); box-shadow:0 0 0 3px rgba(201,168,76,0.08); }
+
+    .success-msg {
+      display:none; color:var(--green);
+      font-family:'JetBrains Mono',monospace; font-size:.82rem; letter-spacing:.06em;
+      margin-top:.5rem; position:relative; z-index:1;
+    }
+
+    /* ── ZOHO WAITLIST FORM THEME ── */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 {
+      max-width: 460px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      text-align: left;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #imgBlock,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #SIGNUP_HEADING,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #SIGNUP_DESCRIPTION {
+      display: none;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.9rem;
+      width: 100%;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield {
+      margin: 0;
+      min-width: 0;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000021"] { grid-column: 1 / -1; } /* Row 1: Email */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000023"] { grid-column: 1 / 2; }  /* Row 2: First */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000025"] { grid-column: 2 / 3; }  /* Row 2: Last */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000029"] { grid-column: 1 / -1; } /* Row 3: Phone */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 [name="SIGNUP_FORM_LABEL"] {
+      display: block;
+      color: var(--text);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding-left: 2px;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 [name="SIGNUP_FORM_LABEL"] [name="SIGNUP_REQUIRED"] {
+      color: var(--red);
+      position: static;
+      display: inline-block;
+      margin-left: 1px;
+      transform: translateY(-0.25em);
+      line-height: 1;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="email"],
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="text"] {
+      width: 100%;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.78rem 0.95rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="email"]:focus,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="text"]:focus {
+      border-color: rgba(201,168,76,0.55);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+      background: rgba(255,255,255,0.06);
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #errorMsgDiv {
+      display: none;
+      margin-bottom: 0.6rem;
+      color: #ff8da3;
+      font-size: 0.82rem;
+      font-family: 'Outfit', sans-serif;
+      background: rgba(255,77,106,0.12);
+      border: 1px solid rgba(255,77,106,0.35);
+      border-radius: 8px;
+      padding: 0.55rem 0.7rem;
+      width: fit-content;
+      max-width: min(100%, 520px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @keyframes zohoMessageIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px) scale(.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #errorMsgDiv.zoho-success-message {
+      color: #baf5de;
+      background: rgba(0,229,160,0.1);
+      border-color: rgba(0,229,160,0.35);
+      animation: zohoMessageIn .34s cubic-bezier(.2,.8,.2,1) both;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #errorMsgDiv.zoho-error-message {
+      animation: zohoMessageIn .26s ease both;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zoho-submit-status {
+      display: none;
+      margin-top: 0.65rem;
+      color: #ff8da3;
+      font-size: 0.82rem;
+      font-family: 'Outfit', sans-serif;
+      background: rgba(255,77,106,0.12);
+      border: 1px solid rgba(255,77,106,0.35);
+      border-radius: 8px;
+      padding: 0.55rem 0.7rem;
+      width: fit-content;
+      max-width: min(100%, 520px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT {
+      margin-top: 0.6rem;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin {
+      margin-top: 0.8rem;
+      width: auto;
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 0.82rem 1.2rem;
+      background: linear-gradient(135deg, var(--gold), #B8962E);
+      color: var(--dark);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin[name="SIGNUP_SUBMIT_BUTTON"] {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT + div {
+      text-align: center;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(201,168,76,0.35);
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin[disabled] {
+      opacity: .72;
+      cursor: wait;
+      box-shadow: none;
+      transform: none;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #Zc_SignupSuccess {
+      border: 1px solid rgba(0,229,160,0.35) !important;
+      background: rgba(0,229,160,0.08) !important;
+      color: #baf5de !important;
+      width: 100% !important;
+      margin: 0 0 0.8rem 0 !important;
+      position: static !important;
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem !important;
+      display: none !important; /* suppress Zoho native success box */
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #signupSuccessMsg {
+      color: #baf5de !important;
+      font-family: 'Outfit', sans-serif !important;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .custom-success-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-align: center;
+      width: 100%;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .custom-success-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--green);
+      flex-shrink: 0;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .custom-error-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .custom-error-icon {
+      width: 18px;
+      height: 18px;
+      color: #ff8da3;
+      flex-shrink: 0;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .successicon {
+      filter: saturate(0) brightness(1.5) hue-rotate(60deg);
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zoho-input-invalid {
+      border-color: rgba(255,77,106,0.75) !important;
+      box-shadow: 0 0 0 3px rgba(255,77,106,0.16) !important;
+      background: rgba(255,77,106,0.08) !important;
+    }
+    /* Progressive reveal: email first, then rest */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border-width: 0 !important;
+      pointer-events: none;
+      transform: translateY(-10px) scale(.98);
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin {
+      max-height: 130px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transform-origin: top center;
+      will-change: max-height, opacity, transform;
+      transition: max-height .5s cubic-bezier(.2,.8,.2,1), opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1), margin .3s ease, padding .3s ease;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .recaptcha {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transform-origin: top center;
+      will-change: max-height, opacity, transform;
+      transition: max-height .52s cubic-bezier(.2,.8,.2,1), opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1), margin .3s ease, padding .3s ease;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000023"] { transition-delay: .03s; }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000025"] { transition-delay: .08s; }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000029"] { transition-delay: .13s; }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { transition-delay: .16s; }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { transition-delay: .2s; }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
+      transition-delay: 0s;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .zcsffieldsdiv,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed #REQUIRED_FIELD_TEXT,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed #zcWebOptin,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .recaptcha {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      overflow: hidden !important;
+      margin: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border-width: 0 !important;
+      pointer-events: none !important;
+      transform: translateY(-10px) scale(.98) !important;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding:2.5rem 5vw;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
+      border-top:1px solid rgba(201,168,76,0.1); background:var(--dark2);
+      position:relative; z-index:1;
+    }
+    footer p { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--text-muted); letter-spacing:.04em; }
+    .footer-links { display:flex; gap:2rem; }
+    .footer-links a { font-size:.76rem; color:var(--text-muted); text-decoration:none; font-family:'Outfit',sans-serif; letter-spacing:.06em; text-transform:uppercase; transition:color .2s; }
+    .footer-links a:hover { color:var(--gold); }
+
+    /* ── SCROLL PROGRESS BAR ── */
+    .scroll-progress {
+      position:fixed; top:0; left:0; height:2px; z-index:1000;
+      background:linear-gradient(90deg,var(--gold),var(--cyan));
+      width:0%; transition:width .1s linear;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:transparent; }
+    ::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.1); border-radius:3px; }
+    ::-webkit-scrollbar-thumb:hover { background:rgba(201,168,76,0.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:900px) {
+      .problem { grid-template-columns:1fr; gap:3rem; }
+      .features-grid { grid-template-columns:1fr 1fr; }
+      .tiers-grid { grid-template-columns:1fr; max-width:400px; }
+      .steps-wrap { grid-template-columns:1fr 1fr; }
+      .steps-connector { display:none; }
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+    }
+    @media (max-width:560px) {
+      .features-grid { grid-template-columns:1fr; }
+      .steps-wrap { grid-template-columns:1fr; }
+      /* hero-form removed */
+      .hero-stats { gap:1.5rem; }
+      footer { flex-direction:column; text-align:center; }
+      .footer-links { justify-content:center; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv { grid-template-columns: 1fr; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm { padding: 1rem; }
+    }
+  </style>
+  <script>
+    (function(){
+      var mq = window.matchMedia('(prefers-color-scheme: light)');
+      function setFav(e){
+        document.getElementById('favicon').href = e.matches ? 'favicon-light.png' : 'favicon-dark.png';
+      }
+      setFav(mq);
+      mq.addEventListener('change', setFav);
+    })();
+  </script>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- AMBIENT ORBS -->
+<div class="orb orb-1" id="orb1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="orb orb-4"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62" fill="none" width="34" height="34" style="flex-shrink:0">
+      <defs><mask id="cm"><circle cx="31" cy="31" r="23" fill="white"/><circle cx="40" cy="25" r="19" fill="black"/></mask></defs>
+      <circle cx="31" cy="31" r="23" fill="#C9A84C" mask="url(#cm)"/>
+      <polyline points="8,52 14,44 20,48 28,34 34,38 46,20" stroke="#EAE8F0" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polygon points="52,11 51,23 41,17" fill="#EAE8F0"/>
+    </svg>
+    <span class="logo-wordmark">Barakah</span>
+  </a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#how">How It Works</a>
+    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="closeMobile()">Features</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#how" onclick="closeMobile()">How It Works</a>
+  <a href="#waitlist" class="m-cta" onclick="closeMobile()">Join Waitlist</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-cyan"></div>
+  <div class="hero-grid"></div>
+
+  <div class="tag">
+    <span class="tag-dot"></span>
+    Now accepting early access signups
+  </div>
+
+  <h1>Trade <em>Smarter.</em><br>Learn Faster.</h1>
+
+  <p class="hero-sub" style="max-width: 980px;">
+    <span style="white-space: nowrap;">The AI-powered platform that turns your trade history into a personalized roadmap for improvement.</span><br><span style="white-space: nowrap;">Analytics, education, and mentorship — all in one place.</span>
+  </p>
+
+  <button class="btn-join-waitlist" onclick="scrollToWaitlist()">Join the Waitlist</button>
+  <p class="hero-note" style="display:block;">No credit card required &nbsp;·&nbsp; Free tier available at launch</p>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-row">
+        <span class="stat-num" data-target="25">0</span><span class="stat-suffix">M+</span>
+      </div>
+      <span class="stat-label">US Retail Traders</span>
+    </div>
+    <div class="stat-item">
+      <div class="stat-row">
+        <span class="stat-num" data-target="3">0</span>
+      </div>
+      <span class="stat-label">Membership Tiers</span>
+    </div>
+    <div class="stat-item">
+      <div class="stat-row">
+        <span class="stat-num">AI</span>
+      </div>
+      <span class="stat-label">Powered Feedback</span>
+    </div>
+  </div>
+
+  <div class="hero-chart">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none" width="100%" height="100%">
+      <polyline points="0,180 80,160 160,170 240,140 320,150 400,110 480,120 560,90 640,100 720,70 800,80 880,50 960,60 1040,30 1120,40 1200,10"
+        fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+      <polyline points="0,180 80,160 160,170 240,140 320,150 400,110 480,120 560,90 640,100 720,70 800,80 880,50 960,60 1040,30 1120,40 1200,10 1200,200 0,200"
+        fill="url(#chartGrad)" stroke="none"/>
+      <defs>
+        <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEM / SOLUTION -->
+<section class="problem">
+  <div class="reveal-left">
+    <span class="section-label">The Problem</span>
+    <h2 class="section-title">Most traders fail for the <span style="color:var(--gold)">same reasons</span></h2>
+    <ul class="problem-list">
+      <li>
+        <svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D6A" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        No structured, high-quality trading education that matches their skill level
+      </li>
+      <li>
+        <svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D6A" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Misleading information online that creates unrealistic expectations
+      </li>
+      <li>
+        <svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D6A" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        No way to track and analyze their own performance patterns over time
+      </li>
+      <li>
+        <svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D6A" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Limited access to hands-on practice tools and real mentorship
+      </li>
+      <li>
+        <svg class="x-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D6A" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Fragmented tools — journals here, charts there, education somewhere else
+      </li>
+    </ul>
+  </div>
+  <div class="solution-card reveal-right">
+    <h3>One platform.<br>Every edge you need.</h3>
+    <p>Barakah Trading integrates AI-powered analytics, adaptive education, personalized mentorship, and competitive challenges into a single, seamless platform — so you can stop guessing and start growing.</p>
+    <span class="solution-byline">Built by traders, for traders.</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-header reveal">
+    <span class="section-label">What You Get</span>
+    <h2 class="section-title">Every tool you need<br>to trade with confidence</h2>
+  </div>
+
+  <div class="features-grid">
+
+    <div class="feature-card reveal" style="transition-delay:.05s">
+      <div class="feature-icon-wrap">
+        <!-- AI chip / CPU icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="7" y="7" width="10" height="10" rx="1.5"/>
+          <line x1="7" y1="10" x2="4" y2="10"/><line x1="7" y1="14" x2="4" y2="14"/>
+          <line x1="17" y1="10" x2="20" y2="10"/><line x1="17" y1="14" x2="20" y2="14"/>
+          <line x1="10" y1="7" x2="10" y2="4"/><line x1="14" y1="7" x2="14" y2="4"/>
+          <line x1="10" y1="17" x2="10" y2="20"/><line x1="14" y1="17" x2="14" y2="20"/>
+          <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h4>AI Trade Analysis</h4>
+      <p>Connect your brokerage and receive personalized AI feedback on every trade — identifying patterns, weaknesses, and opportunities in your strategy.</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:.1s">
+      <div class="feature-icon-wrap">
+        <!-- Bar chart icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/>
+          <line x1="1" y1="21" x2="23" y2="21"/>
+        </svg>
+      </div>
+      <h4>Performance Dashboard</h4>
+      <p>Customizable analytics dashboards that break down your win rate, risk/reward ratio, emotional tendencies, and long-term skill progression.</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:.15s">
+      <div class="feature-icon-wrap">
+        <!-- Replay / rewind icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.36 2.64L3 8"/>
+          <polyline points="3 3 3 8 8 8"/>
+          <polygon points="10,9 10,15 15,12" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+      <h4>Market Replay Mode</h4>
+      <p>Replay any past market session to practice your decision-making in real historical conditions — without risking real money.</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:.2s">
+      <div class="feature-icon-wrap">
+        <!-- Education / graduation cap -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 22 8 12 14 2 8"/>
+          <path d="M6 11v5c0 2.21 2.69 4 6 4s6-1.79 6-4v-5"/>
+          <line x1="22" y1="8" x2="22" y2="14"/>
+        </svg>
+      </div>
+      <h4>Adaptive Education</h4>
+      <p>A curated video library and interactive modules that adapt to your skill level — from beginner basics to advanced strategy development.</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:.25s">
+      <div class="feature-icon-wrap">
+        <!-- Backtesting: monitor with play button = running a strategy -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <polygon points="9,8 9,14 16,11" fill="currentColor" stroke="none"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <h4>Strategy Backtesting</h4>
+      <p>Test your trading strategies against years of historical market data before risking a single dollar in live markets.</p>
+    </div>
+
+    <div class="feature-card reveal" style="transition-delay:.3s">
+      <div class="feature-icon-wrap">
+        <!-- Trophy icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2h12v6a6 6 0 0 1-12 0V2z"/>
+          <path d="M6 4H3a2 2 0 0 0 0 4h3"/><path d="M18 4h3a2 2 0 0 1 0 4h-3"/>
+          <line x1="12" y1="14" x2="12" y2="18"/><rect x="8" y="18" width="8" height="3" rx="1"/>
+        </svg>
+      </div>
+      <h4>Trading Competitions</h4>
+      <p>Compete in live trading challenges with pooled prize funds. Build discipline, track your rankings, and earn real rewards.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="how-header reveal">
+    <span class="section-label">Getting Started</span>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <p class="section-sub" style="margin:0 auto;">Four simple steps to your first AI-powered performance insight.</p>
+  </div>
+
+  <div class="steps-wrap">
+    <div class="steps-connector"></div>
+
+    <div class="step reveal" style="transition-delay:.05s">
+      <div class="step-icon-wrap">
+        <span class="step-num-badge">01</span>
+        <!-- User / account icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/>
+        </svg>
+      </div>
+      <h4>Create Your Account</h4>
+      <p>Sign up and complete a short skill assessment so the platform personalizes your experience from day one.</p>
+    </div>
+
+    <div class="step reveal" style="transition-delay:.15s">
+      <div class="step-icon-wrap">
+        <span class="step-num-badge">02</span>
+        <!-- Link / broker connection icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+      </div>
+      <h4>Connect Your Broker</h4>
+      <p>Securely link your brokerage account via API. Barakah imports your trade history automatically.</p>
+    </div>
+
+    <div class="step reveal" style="transition-delay:.25s">
+      <div class="step-icon-wrap">
+        <span class="step-num-badge">03</span>
+        <!-- AI analysis / spark icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+      <h4>Get Your Analysis</h4>
+      <p>Receive your first AI-generated performance report — identifying your strengths, blind spots, and next steps.</p>
+    </div>
+
+    <div class="step reveal" style="transition-delay:.35s">
+      <div class="step-icon-wrap">
+        <span class="step-num-badge">04</span>
+        <!-- Growth / trending up icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+          <polyline points="17 6 23 6 23 12"/>
+        </svg>
+      </div>
+      <h4>Grow &amp; Compete</h4>
+      <p>Follow your personalized improvement plan, access education, join the community, and enter competitions.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section class="tiers" id="pricing">
+  <div class="tiers-header reveal">
+    <span class="section-label">Membership Tiers</span>
+    <h2 class="section-title">Choose your edge</h2>
+    <p class="section-sub">Start free. Upgrade when you're ready. Every tier delivers clear, measurable value.</p>
+  </div>
+
+  <div class="tiers-grid">
+    <div class="tier-card reveal" style="transition-delay:.05s">
+      <p class="tier-name">Basic</p>
+      <div class="tier-price">$24<span>.99/mo</span></div>
+      <p class="tier-desc">Build unshakable discipline and trade like a pro from day one.</p>
+      <ul class="tier-features">
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Broker Integration (all tiers)</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Digital Trade Journal</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade Checklist (pre &amp; post)</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade Tagging &amp; Filtering</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Educational Video Library</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Community Forum Access</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly AI Journal Summary</li>
+      </ul>
+      <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
+    </div>
+
+    <div class="tier-card featured reveal" style="transition-delay:.12s">
+      <div class="tier-badge">Most Popular</div>
+      <p class="tier-name">Pro</p>
+      <div class="tier-price">$59<span>.99/mo</span></div>
+      <p class="tier-desc">Unlock your full potential with precision, clarity, and momentum.</p>
+      <ul class="tier-features">
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Basic</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Full AI Trade Optimization</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Real-Time Data &amp; Analytics</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Strategy Backtesting</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Market Replay Mode</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Customizable Dashboards</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly Performance Reports</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Peer Benchmarking</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Copy Trading (2 connections)</li>
+      </ul>
+      <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
+    </div>
+
+    <div class="tier-card reveal" style="transition-delay:.2s">
+      <p class="tier-name">Elite</p>
+      <div class="tier-price">$119<span>.99/mo</span></div>
+      <p class="tier-desc">Step into the elite circle and perform at your absolute peak.</p>
+      <ul class="tier-features">
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Competitions with Prize Pools</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Exclusive Networking Events &amp; Private Sessions</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Copy Trading (up to 5 brokers)</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced AI Recommendations</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited Backtesting</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly Performance Reports</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Early Access to New Features</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Priority Support</li>
+      </ul>
+      <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:2rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;">Save 15% (Elite) or 10% (Basic &amp; Pro) with annual billing &nbsp;·&nbsp; Cancel anytime</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA / WAITLIST -->
+<section class="cta-section" id="waitlist">
+  <div class="cta-glow"></div>
+  <div class="cta-glow-cyan"></div>
+  <h2 class="reveal">Be first in line.<br><span style="color:var(--gold);">Founding members get 20% off for life.</span></h2>
+  <p class="reveal" style="transition-delay:.1s">Join the waitlist and lock in your founding member discount — 20% off for life, available for 1 month after launch.</p>
+
+<!--Zoho Campaigns Web-Optin Form Starts Here-->
+<script type="text/javascript" src="https://zgnp-zngp.maillist-manage.com/js/optin.min.js" onload="setupSF('sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639','ZCFORMVIEW',false,'acc',false,'2')"></script>
+<script type="text/javascript">
+	function runOnFormSubmit_sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639(th){
+		// Trigger custom inline success after Zoho accepts submit event.
+		window.setTimeout(function () {
+			var root = document.getElementById('sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639');
+			if (!root) return;
+			var errorDiv = root.querySelector('#errorMsgDiv');
+			var successBox = root.querySelector('#Zc_SignupSuccess');
+			var lower = (errorDiv && errorDiv.textContent ? errorDiv.textContent : '').toLowerCase();
+			// If Zoho has already surfaced a clear failure message, do not force success UI.
+			if (lower.indexOf('error') !== -1 || lower.indexOf('invalid') !== -1 || lower.indexOf('required') !== -1 || lower.indexOf('captcha') !== -1) return;
+			if (successBox) successBox.style.display = 'none';
+			if (errorDiv) errorDiv.style.display = 'none';
+			root.classList.add('zoho-success-collapsed');
+			root.classList.remove('zoho-collapsed');
+			window.setTimeout(function () {
+				if (!errorDiv) return;
+				errorDiv.classList.remove('zoho-error-message');
+				errorDiv.classList.add('zoho-success-message');
+				errorDiv.innerHTML = '\
+					<div class="custom-success-wrap">\
+						<svg class="custom-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">\
+							<polyline points="20 6 9 17 4 12"></polyline>\
+						</svg>\
+						<span>You\'re on the list! We\'ll be in touch soon.</span>\
+					</div>';
+				errorDiv.style.display = 'block';
+			}, 480);
+		}, 1400);
+	};
+</script>
+
+<meta content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<div id="sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639" data-type="signupform">
+	<div id="customForm">
+		<input type="hidden" id="recapTheme" value="2">
+		<input type="hidden" id="isRecapIntegDone" value="false">
+		<input type="hidden" id="recapMode" value="1634770000000054270">
+		<input type="hidden" id="signupFormType" value="LargeForm_Vertical">
+		<div name="SIGNUP_PAGE" id="SIGNUP_PAGE" class="SIGNUP_PAGE large_form_2_css">
+			<div>
+				<div name="" changeid="" changename="">
+					<div id="imgBlock" name="LOGO_DIV" logo="true"></div>
+				</div>
+				<br>
+				<div id="signupMainDiv" name="SIGNUPFORM" changeid="SIGNUPFORM" changename="SIGNUPFORM">
+					<div>
+						<div style="position:relative;">
+							<div id="Zc_SignupSuccess" style="display:none;position:absolute;margin-left:4%;width:90%;background-color: white; padding: 3px; border: 3px solid rgb(194, 225, 154);  margin-top: 10px;margin-bottom:10px;word-break:break-all "></div>
+						</div>
+						<form method="POST" id="zcampaignOptinForm" action="https://zgnp-zngp.maillist-manage.com/weboptin.zc" target="_zcSignup">
+							<div id="SIGNUP_BODY_ALL" name="SIGNUP_BODY_ALL">
+								<h1 id="SIGNUP_HEADING" name="SIGNUP_HEADING" changeid="SIGNUP_MSG" changetype="SIGNUP_HEADER"></h1>
+								<div id="SIGNUP_BODY" name="SIGNUP_BODY">
+									<div>
+										<div class="" changeid="SIGNUP_MSG" id="SIGNUP_DESCRIPTION" changetype="SIGNUP_DESCRIPTION"></div>
+										<div id="errorMsgDiv"></div>
+										<div>
+											<div name="fieldsdivSf" class="zcsffieldsdiv">
+												<div class="zcsffield " fieldid="1634770000000000021">
+													<div>
+														<div name="SIGNUP_FORM_LABEL">Email&nbsp;
+															
+															
+															
+															<span name="SIGNUP_REQUIRED">*</span>
+														
+														
+														
+														</div>
+														<div><!-- check to mark emailid field as type email, and other mandatory fields as type required -->
+															<input name="CONTACT_EMAIL" changeitem="SIGNUP_FORM_FIELD" maxlength="100" type="email" required="true" value="" placeholder="name@example.com">
+															<span style="display:none" id="dt_CONTACT_EMAIL">1,true,6,Contact Email,2</span>
+														</div>
+													</div>
+													
+													
+													
+													
+												
+											<div></div>
+											
+												
+												
+            
+												</div>
+												<div class="zcsffield " fieldid="1634770000000000023">
+													<div>
+														<div name="SIGNUP_FORM_LABEL">First Name&nbsp;<span name="SIGNUP_REQUIRED">*</span></div>
+														<div><!-- check to mark emailid field as type email, and other mandatory fields as type required -->
+															<input name="FIRSTNAME" changeitem="SIGNUP_FORM_FIELD" maxlength="100" type="text" required="true" value="" placeholder="John">
+															<span style="display:none" id="dt_FIRSTNAME">1,true,1,First Name,2</span>
+														</div>
+													</div><div></div></div>
+												<div class="zcsffield " fieldid="1634770000000000025">
+													<div>
+														<div name="SIGNUP_FORM_LABEL">Last Name&nbsp;<span name="SIGNUP_REQUIRED">*</span></div>
+														<div><!-- check to mark emailid field as type email, and other mandatory fields as type required -->
+															<input name="LASTNAME" changeitem="SIGNUP_FORM_FIELD" maxlength="50" type="text" required="true" value="" placeholder="Doe">
+															<span style="display:none" id="dt_LASTNAME">1,true,1,Last Name,2</span>
+														</div>
+													</div><div></div></div>
+												<div class="zcsffield " fieldid="1634770000000000029">
+													<div>
+														<div name="SIGNUP_FORM_LABEL">Phone&nbsp;<span name="SIGNUP_REQUIRED">*</span></div>
+														<div><!-- check to mark emailid field as type email, and other mandatory fields as type required -->
+															<input name="PHONE" changeitem="SIGNUP_FORM_FIELD" maxlength="20" type="text" required="true" value="" placeholder="+1 555 123 4567">
+															<span style="display:none" id="dt_PHONE">1,true,1,Phone,2</span>
+														</div>
+													</div><div></div></div>
+											</div><!-- Captcha for Signup -->
+											<div class="recaptcha" style="padding: 10px 0px 10px 10px;display:none " id="captchaOld" name="captchaContainer">
+												<div>
+													<div id="captchaParent">
+														<img src="//campaigns.zoho.com/images/refresh_icon.png" onclick="loadCaptcha('https://campaigns.zoho.com/campaigns/CaptchaVerify.zc?mode=generate',this,'#sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639');" id="relCaptcha">
+														<div id="captchaDiv" captcha="true" name=""></div>
+														<input placeholder="Captcha" id="captchaText" name="captchaText" changeitem="SIGNUP_FORM_FIELD" maxlength="100" type="text">
+														<span name="SIGNUP_REQUIRED" id="capRequired">*</span>
+													</div>
+												</div><div></div></div>
+											<input type="hidden" id="secretid" value="6LdNeDUUAAAAAG5l7cJfv1AA5OKLslkrOa_xXxLs"><!-- Captcha for Signup End--><!-- Other Lists Subscription Start--><!-- Other Lists Subscription End--><div></div>
+											<div id="REQUIRED_FIELD_TEXT" changetype="REQUIRED_FIELD_TEXT" name="SIGNUP_REQUIRED">*Required Fields</div>
+											<div>
+												<input type="button" action="Save" id="zcWebOptin" name="SIGNUP_SUBMIT_BUTTON" changetype="SIGNUP_SUBMIT_BUTTON_TEXT" value="Claim My Spot">
+											</div><!-- Do not edit the below Zoho Campaigns hidden tags -->
+											<input type="hidden" id="fieldBorder" value="">
+											<input type="hidden" name="zc_trackCode" id="zc_trackCode" value="ZCFORMVIEW" onload="">
+											<input type="hidden" name="viewFrom" id="viewFrom" value="URL_ACTION">
+											<input type="hidden" id="submitType" name="submitType" value="optinCustomView">
+											<input type="hidden" id="lD" name="lD" value="116afdea75377f2f3">
+											<input type="hidden" name="emailReportId" id="emailReportId" value="">
+											<input type="hidden" name="zx" id="cmpZuid" value="136e8002d">
+											<input type="hidden" name="zcvers" value="3.0">
+											<input type="hidden" name="oldListIds" id="allCheckedListIds" value="">
+											<input type="hidden" id="mode" name="mode" value="OptinCreateView">
+											<input type="hidden" id="zcld" name="zcld" value="116afdea75377f2f3">
+											<input type="hidden" id="zctd" name="zctd" value="116afdea75377db89">
+											<input type="hidden" id="document_domain" value="">
+											<input type="hidden" id="zc_Url" value="zgnp-zngp.maillist-manage.com">
+											<input type="hidden" id="new_optin_response_in" value="2">
+											<input type="hidden" id="duplicate_optin_response_in" value="2">
+											<input type="hidden" id="zc_formIx" name="zc_formIx" value="3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639"><!-- End of the campaigns hidden tags --></div>
+									</div>
+									<input type="hidden" id="isCaptchaNeeded" value="false">
+									<input type="hidden" id="superAdminCap" value="0">
+									<img src="https://zgnp-zngp.maillist-manage.com/images/spacer.gif" onload="referenceSetter(this)" id="refImage">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="zcOptinOverLay" oncontextmenu="return false" style="display:none;text-align: center; background-color: rgb(0, 0, 0); opacity: 0.5; z-index: 100; position: fixed; width: 100%; top: 0px; left: 0px; height: 988px;"></div>
+<div id="zcOptinSuccessPopup" style="display:none;z-index: 9999;width: 800px; height: 40%;top: 84px;position: fixed; left: 26%;background-color: #FFFFFF;border-color: #E6E6E6; border-style: solid; border-width: 1px;  box-shadow: 0 1px 10px #424242;padding: 35px;">
+	<span style="position: absolute;top: -16px;right:-14px;z-index:99999;cursor: pointer;" id="closeSuccess">
+		<img src="https://zgnp-zngp.maillist-manage.com/images/videoclose.png">
+	</span>
+	<div id="zcOptinSuccessPanel"></div>
+</div>
+
+<!--Zoho Campaigns Web-Optin Form Ends Here-->
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/" class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62" fill="none" width="28" height="28" style="flex-shrink:0">
+      <defs><mask id="cmf"><circle cx="31" cy="31" r="23" fill="white"/><circle cx="40" cy="25" r="19" fill="black"/></mask></defs>
+      <circle cx="31" cy="31" r="23" fill="#C9A84C" mask="url(#cmf)"/>
+      <polyline points="8,52 14,44 20,48 28,34 34,38 46,20" stroke="#EAE8F0" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polygon points="52,11 51,23 41,17" fill="#EAE8F0"/>
+    </svg>
+    <span class="logo-wordmark">Barakah</span>
+  </a>
+  <p>© 2026 Barakah Trading LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  /* ── SCROLL PROGRESS ── */
+  window.addEventListener('scroll', () => {
+    const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    document.getElementById('scrollProgress').style.width = (p * 100) + '%';
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ── MOBILE MENU ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  /* ── SCROLL REVEAL (all classes) ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  /* ── STAT COUNT-UP ── */
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      if (!target) return;
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current;
+        if (current >= target) clearInterval(timer);
+      }, 35);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => statObserver.observe(el));
+
+  /* ── SUBTLE MOUSE PARALLAX ON ORB ── */
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+    document.getElementById('orb1').style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  /* ── SCROLL TO WAITLIST ── */
+  function scrollToWaitlist() {
+    document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  /* ── ZOHO PROGRESSIVE REVEAL ── */
+  (function () {
+    const zohoRoot = document.getElementById('sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639');
+    const errorDiv = zohoRoot?.querySelector('#errorMsgDiv');
+    const successBox = zohoRoot?.querySelector('#Zc_SignupSuccess');
+    const emailInput = zohoRoot?.querySelector('input[name="CONTACT_EMAIL"]');
+    const firstNameInput = zohoRoot?.querySelector('input[name="FIRSTNAME"]');
+    const lastNameInput = zohoRoot?.querySelector('input[name="LASTNAME"]');
+    const phoneInput = zohoRoot?.querySelector('input[name="PHONE"]');
+    if (phoneInput) {
+      phoneInput.setAttribute('inputmode', 'numeric');
+      phoneInput.setAttribute('pattern', '[0-9]*');
+      phoneInput.addEventListener('input', () => {
+        phoneInput.value = (phoneInput.value || '').replace(/\D+/g, '');
+      });
+    }
+
+
+    if (!zohoRoot || !emailInput) return;
+
+    [firstNameInput, lastNameInput, phoneInput].forEach((input) => {
+      const field = input?.closest('.zcsffield');
+      if (field) field.setAttribute('data-zoho-extra', 'true');
+    });
+
+    let internalMessageWrite = false;
+    const looksLikeSuccess = (text) => {
+      const t = (text || '').toLowerCase();
+      return t.includes('thank') || t.includes('success') || t.includes('signed up');
+    };
+    const renderCustomSuccess = () => {
+      if (!errorDiv) return;
+      errorDiv.style.display = 'none';
+      zohoRoot.classList.add('zoho-success-collapsed');
+      zohoRoot.classList.remove('zoho-collapsed');
+      window.setTimeout(() => {
+        internalMessageWrite = true;
+        errorDiv.classList.remove('zoho-error-message');
+        errorDiv.classList.add('zoho-success-message');
+        errorDiv.innerHTML = `
+          <div class="custom-success-wrap">
+            <svg class="custom-success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>You're on the list! We'll be in touch soon.</span>
+          </div>
+        `;
+        errorDiv.style.display = 'block';
+        internalMessageWrite = false;
+      }, 480);
+    };
+    const renderCustomFailure = () => {
+      if (!errorDiv) return;
+      internalMessageWrite = true;
+      errorDiv.classList.remove('zoho-success-message');
+      errorDiv.classList.add('zoho-error-message');
+      errorDiv.innerHTML = `
+        <div class="custom-error-wrap">
+          <svg class="custom-error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+          <span>Something went wrong. Please try again.</span>
+        </div>
+      `;
+      errorDiv.style.display = 'block';
+      internalMessageWrite = false;
+      zohoRoot.classList.remove('zoho-success-collapsed');
+      zohoRoot.classList.remove('zoho-collapsed');
+    };
+
+    const syncReveal = () => {
+      if (zohoRoot.classList.contains('zoho-success-collapsed')) return;
+      if ((emailInput.value || '').trim().length > 0) {
+        zohoRoot.classList.remove('zoho-collapsed');
+      } else {
+        zohoRoot.classList.add('zoho-collapsed');
+      }
+    };
+
+    zohoRoot.classList.add('zoho-collapsed');
+    emailInput.addEventListener('input', syncReveal);
+    emailInput.addEventListener('blur', syncReveal);
+    if (successBox) {
+      const successObserver = new MutationObserver(() => {
+        const text = (successBox.textContent || '').trim();
+        if (looksLikeSuccess(text)) renderCustomSuccess();
+      });
+      successObserver.observe(successBox, { attributes: true, childList: true, subtree: true, characterData: true });
+    }
+    if (errorDiv) {
+      const errorObserver = new MutationObserver(() => {
+        if (internalMessageWrite) return;
+        const text = (errorDiv.textContent || '').trim();
+        if (!text) return;
+        if (looksLikeSuccess(text)) {
+          renderCustomSuccess();
+          return;
+        }
+        if (text.toLowerCase().includes('please correct') || text.toLowerCase().includes('error') || text.toLowerCase().includes('invalid') || text.toLowerCase().includes('required') || text.toLowerCase().includes('captcha')) {
+          renderCustomFailure();
+        }
+      });
+      errorObserver.observe(errorDiv, { childList: true, subtree: true, characterData: true });
+    }
+    syncReveal();
+  })();
+
+</script>
+<script src="/app.js" defer></script>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                      
