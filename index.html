@@ -563,8 +563,8 @@
     .tiers-header .section-sub { margin:0 auto; }
 
     .tiers-grid {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
-      max-width:1000px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem;
+      max-width:1280px; margin:0 auto;
     }
 
     .tier-card {
@@ -951,7 +951,7 @@
     @media (max-width:900px) {
       .problem { grid-template-columns:1fr; gap:3rem; }
       .features-grid { grid-template-columns:1fr 1fr; }
-      .tiers-grid { grid-template-columns:1fr; max-width:400px; }
+      .tiers-grid { grid-template-columns:repeat(2,1fr); max-width:700px; }
       .steps-wrap { grid-template-columns:1fr 1fr; }
       .steps-connector { display:none; }
       .nav-links { display:none; }
@@ -959,6 +959,7 @@
     }
     @media (max-width:560px) {
       .features-grid { grid-template-columns:1fr; }
+      .tiers-grid { grid-template-columns:1fr; max-width:400px; }
       .steps-wrap { grid-template-columns:1fr; }
       /* hero-form removed */
       .hero-stats { gap:1.5rem; }
@@ -1047,7 +1048,7 @@
     </div>
     <div class="stat-item">
       <div class="stat-row">
-        <span class="stat-num" data-target="3">0</span>
+        <span class="stat-num" data-target="4">0</span>
       </div>
       <span class="stat-label">Membership Tiers</span>
     </div>
@@ -1285,18 +1286,34 @@
   </div>
 
   <div class="tiers-grid">
+    <div class="tier-card reveal" style="transition-delay:.0s">
+      <p class="tier-name">Free</p>
+      <div class="tier-price">$0<span>/mo</span></div>
+      <p class="tier-desc">Get a feel for the platform, forever free.</p>
+      <ul class="tier-features">
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited paper trading (delayed data)</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI Trade Chat — 3 messages/day</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade journal — 30 trades/month</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade checklist — unlimited</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Strategic notebook — 5 strategies</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Symbol watchlist — 10 symbols</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Shareable discipline scorecard (watermarked)</li>
+      </ul>
+      <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
+    </div>
+
     <div class="tier-card reveal" style="transition-delay:.05s">
       <p class="tier-name">Basic</p>
       <div class="tier-price">$24<span>.99/mo</span></div>
       <p class="tier-desc">Build unshakable discipline and trade like a pro from day one.</p>
       <ul class="tier-features">
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Broker Integration (all tiers)</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Digital Trade Journal</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade Checklist (pre &amp; post)</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade Tagging &amp; Filtering</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Educational Video Library</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Free, unlocked further</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI Trade Chat — 10 messages/day</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited journal, notebook &amp; checklist</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Symbol watchlist — 25 symbols</li>
         <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Community Forum Access</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly AI Journal Summary</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Educational Video Library</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trading Resource Library</li>
       </ul>
       <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
     </div>
@@ -1307,15 +1324,14 @@
       <div class="tier-price">$59<span>.99/mo</span></div>
       <p class="tier-desc">Unlock your full potential with precision, clarity, and momentum.</p>
       <ul class="tier-features">
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Basic</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Full AI Trade Optimization</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Real-Time Data &amp; Analytics</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Strategy Backtesting</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Market Replay Mode</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Customizable Dashboards</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Monthly Performance Reports</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Peer Benchmarking</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Basic, plus real-time data</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI Trade Chat — 50 messages/day</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Risk Management Score &amp; Behavioral Insights</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly Performance Reports</li>
         <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Copy Trading (2 connections)</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Social Sentiment Integration — 25 symbols</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Strategy Backtesting — 20/month</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trading Rooms — public rooms</li>
       </ul>
       <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
     </div>
@@ -1326,14 +1342,15 @@
       <p class="tier-desc">Step into the elite circle and perform at your absolute peak.</p>
       <ul class="tier-features">
         <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Competitions with Prize Pools</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Exclusive Networking Events &amp; Private Sessions</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI Trade Chat — 200 messages/day</li>
         <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Copy Trading (up to 5 brokers)</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced AI Recommendations</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited Backtesting</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Weekly Performance Reports</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Real-time news with position-flagging</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Prop Firm Simulator — 3 concurrent challenges</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Competitions with Prize Pools — priority entry</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Exclusive Live Webinars</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Private Trading Rooms + Expert Sessions</li>
         <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Early Access to New Features</li>
-        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Priority Support</li>
+        <li><svg class="check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Priority Support (&lt;4h response)</li>
       </ul>
       <button class="btn-outline" onclick="scrollToWaitlist()">Join Waitlist</button>
     </div>
