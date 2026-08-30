@@ -318,9 +318,24 @@
 
     .hero-note {
       margin-top:1rem;
+      max-width:460px;
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:0.3rem 0.65rem;
       font-family:'JetBrains Mono',monospace; font-size:.72rem;
       color:var(--text-muted); letter-spacing:.06em;
+      line-height:1.5;
+      text-align:center;
       animation: fadeUp 1s .4s ease both;
+    }
+    .hero-note-item { display:inline-flex; align-items:center; white-space:nowrap; }
+    .hero-note-item + .hero-note-item::before {
+      content:'·';
+      margin-right:0.65rem;
+      opacity:0.55;
     }
 
     .hero-stats {
@@ -1042,7 +1057,16 @@
       .hero-stats { margin-top: 2rem; gap: 1.25rem; }
       .hero-offer { margin-bottom: 0.85rem; padding: 0.75rem 0.85rem; }
       .hero-offer-sub { font-size: 0.72rem; }
-      .hero-note { margin-top: 0.75rem; font-size: 0.68rem; }
+      .hero-note {
+        margin-top: 0.75rem;
+        flex-direction:column;
+        gap:0.2rem;
+        font-size:0.65rem;
+        letter-spacing:0.04em;
+        line-height:1.45;
+      }
+      .hero-note-item { white-space:normal; }
+      .hero-note-item + .hero-note-item::before { display:none; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { width: 100%; display: block; text-align: center; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { display: none; }
     }
@@ -1298,7 +1322,11 @@
 <!--Zoho Campaigns Web-Optin Form Ends Here-->
   </div>
 
-  <p class="hero-note" style="display:block;">No credit card required &nbsp;·&nbsp; Free tier available at launch &nbsp;·&nbsp; Founding discount locked in at signup</p>
+  <p class="hero-note">
+    <span class="hero-note-item">No credit card required</span>
+    <span class="hero-note-item">Free tier available at launch</span>
+    <span class="hero-note-item">Founding discount locked in at signup</span>
+  </p>
 
   <div class="hero-stats">
     <div class="stat-item">
