@@ -1,5 +1,9 @@
   function scrollToWaitlist() {
-    document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
+    const target = document.getElementById('waitlist');
+    if (!target) return;
+    const navOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 68;
+    const top = target.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 
   const observer = new IntersectionObserver((entries) => {
