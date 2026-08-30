@@ -333,10 +333,9 @@
     .form-email-note-wrap {
       grid-column: 1 / -1;
       margin: 0;
-      max-height: 40px;
       opacity: 1;
       overflow: hidden;
-      transition: max-height .4s cubic-bezier(.2,.8,.2,1), opacity .3s ease;
+      transition: opacity .3s ease;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639:not(.zoho-collapsed) .form-email-note-wrap,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .form-email-note-wrap {
@@ -351,6 +350,7 @@
       letter-spacing:.05em;
       text-align:center;
       line-height:1.4;
+      margin: 0;
     }
 
     .hero-stats {
@@ -963,9 +963,10 @@
       background: rgba(255,77,106,0.08) !important;
     }
     /* Progressive reveal: email first, then rest */
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zoho-extra-fields-wrap,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT + div {
+      display: none;
       max-height: 0;
       opacity: 0;
       overflow: hidden;
@@ -977,8 +978,16 @@
       transform: translateY(-10px) scale(.98);
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffieldsdiv {
-      max-height: 9rem;
-      overflow: hidden;
+      gap: 0.35rem;
+      max-height: none;
+      overflow: visible;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zoho-extra-fields-wrap {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      width: 100%;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT,
@@ -1004,12 +1013,13 @@
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000029"] { transition-delay: .13s; }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { transition-delay: .16s; }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { transition-delay: .2s; }
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zoho-extra-fields-wrap,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
       transition-delay: 0s;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .zcsffieldsdiv,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .zoho-extra-fields-wrap,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed #REQUIRED_FIELD_TEXT,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed #zcWebOptin,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .recaptcha {
@@ -1053,12 +1063,12 @@
 
     /* ── RESPONSIVE ── */
     @media (min-width: 901px) {
-      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zoho-extra-fields-wrap {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
       }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000023"] { grid-column: 1 / 2; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000025"] { grid-column: 2 / 3; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000029"] { grid-column: 1 / -1; }
     }
     @media (max-width:900px) {
       .problem { grid-template-columns:1fr; gap:3rem; }
@@ -1263,6 +1273,7 @@
 												<div class="form-email-note-wrap">
 													<p class="form-email-note">No credit card required</p>
 												</div>
+												<div class="zoho-extra-fields-wrap">
 												<div class="zcsffield " fieldid="1634770000000000023">
 													<div>
 														<div name="SIGNUP_FORM_LABEL">First Name&nbsp;<span name="SIGNUP_REQUIRED">*</span></div>
@@ -1287,6 +1298,7 @@
 															<span style="display:none" id="dt_PHONE">1,true,1,Phone,2</span>
 														</div>
 													</div><div></div></div>
+												</div>
 											</div>
 											<div class="recaptcha" style="padding: 10px 0px 10px 10px;display:none " id="captchaOld" name="captchaContainer">
 												<div>
