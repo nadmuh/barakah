@@ -212,13 +212,6 @@
       position:relative; z-index:2;
       scroll-margin-top: calc(var(--nav-h) + 1rem);
     }
-    .hero-waitlist #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 1.25rem 1.1rem 1.1rem;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-    }
 
     .hero-form {
       display:flex; gap:.75rem; width:100%; max-width:460px;
@@ -891,6 +884,7 @@
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
+      display: none;
       max-height: 0;
       opacity: 0;
       overflow: hidden;
@@ -901,9 +895,14 @@
       pointer-events: none;
       transform: translateY(-10px) scale(.98);
     }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffieldsdiv {
+      max-height: none;
+      gap: 0;
+    }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin {
+      display: block;
       max-height: 320px;
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -913,7 +912,7 @@
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .recaptcha {
-      max-height: 500px;
+      max-height: none;
       opacity: 1;
       transform: translateY(0) scale(1);
       transform-origin: top center;
@@ -1013,10 +1012,6 @@
       .steps-wrap { grid-template-columns:1fr; }
       .hero { padding: calc(var(--nav-h) + 0.85rem) 1rem 2rem; }
       .hero-waitlist { max-width:100%; }
-      .hero-waitlist #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm {
-        padding: 0.9rem 0.85rem 0.85rem;
-        border-radius: 12px;
-      }
       .hero-stats { gap:1.25rem; flex-wrap:wrap; justify-content:center; }
       footer { flex-direction:column; text-align:center; }
       .footer-links { justify-content:center; }
