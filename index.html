@@ -30,17 +30,23 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      overflow-x: hidden;
+      max-width: 100%;
+      overscroll-behavior-x: none;
+    }
     body {
       background: var(--dark);
       color: var(--text);
       font-family: 'Outfit', sans-serif;
       font-weight: 300;
       overflow-x: hidden;
+      max-width: 100%;
       line-height: 1.6;
-      min-width: 100%;
+      position: relative;
     }
 
     /* ── GRAIN ── */
@@ -52,7 +58,14 @@
     }
 
     /* ── AMBIENT ORBS ── */
-    .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; transition: transform 1.2s ease; }
+    .ambient-layer {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb { position: absolute; border-radius: 50%; filter: blur(130px); pointer-events: none; transition: transform 1.2s ease; }
     .orb-1 { width: 800px; height: 800px; background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%); top: -250px; left: -250px; }
     .orb-2 { width: 650px; height: 650px; background: radial-gradient(circle, rgba(0,212,255,0.055) 0%, transparent 70%); top: 25%; right: -180px; animation: orbFloat 11s ease-in-out infinite; }
     .orb-3 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(201,168,76,0.045) 0%, transparent 70%); bottom: 5%; left: 15%; animation: orbFloat 15s ease-in-out infinite reverse; }
@@ -320,22 +333,17 @@
       margin-top:1rem;
       max-width:460px;
       width:100%;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      align-items:center;
-      gap:0.3rem 0.65rem;
       font-family:'JetBrains Mono',monospace; font-size:.72rem;
       color:var(--text-muted); letter-spacing:.06em;
       line-height:1.5;
       text-align:center;
       animation: fadeUp 1s .4s ease both;
     }
-    .hero-note-item { display:inline-flex; align-items:center; white-space:nowrap; }
-    .hero-note-item + .hero-note-item::before {
-      content:'·';
-      margin-right:0.65rem;
-      opacity:0.55;
+    .hero-note--mobile { display:none; list-style:none; padding:0; margin-top:1rem; max-width:460px; width:100%; }
+    .hero-note--mobile li {
+      font-family:'JetBrains Mono',monospace; font-size:.65rem;
+      color:var(--text-muted); letter-spacing:.04em; line-height:1.45;
+      text-align:center;
     }
 
     .hero-stats {
@@ -1013,6 +1021,8 @@
     .footer-links a { font-size:.76rem; color:var(--text-muted); text-decoration:none; font-family:'Outfit',sans-serif; letter-spacing:.06em; text-transform:uppercase; transition:color .2s; }
     .footer-links a:hover { color:var(--gold); }
 
+    section, nav, footer { max-width: 100%; }
+
     /* ── SCROLL PROGRESS BAR ── */
     .scroll-progress {
       position:fixed; top:0; left:0; height:2px; z-index:1000;
@@ -1047,7 +1057,7 @@
         min-height: auto;
         justify-content: flex-start;
         padding: calc(var(--nav-h) + 1.25rem) 1.25rem 2.5rem;
-        overflow: visible;
+        overflow: hidden;
       }
       h1 { font-size: clamp(1.85rem, 7.5vw, 2.75rem); margin-bottom: 0.85rem; line-height: 1.12; }
       .hero-sub { margin-bottom: 1rem; font-size: 0.92rem; line-height: 1.65; }
@@ -1057,16 +1067,14 @@
       .hero-stats { margin-top: 2rem; gap: 1.25rem; }
       .hero-offer { margin-bottom: 0.85rem; padding: 0.75rem 0.85rem; }
       .hero-offer-sub { font-size: 0.72rem; }
-      .hero-note {
-        margin-top: 0.75rem;
+      .hero-note--desktop { display:none; }
+      .hero-note--mobile {
+        display:flex;
         flex-direction:column;
         gap:0.2rem;
-        font-size:0.65rem;
-        letter-spacing:0.04em;
-        line-height:1.45;
+        align-items:center;
+        animation: fadeUp 1s .4s ease both;
       }
-      .hero-note-item { white-space:normal; }
-      .hero-note-item + .hero-note-item::before { display:none; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { width: 100%; display: block; text-align: center; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { display: none; }
     }
@@ -1112,10 +1120,12 @@
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- AMBIENT ORBS -->
-<div class="orb orb-1" id="orb1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
-<div class="orb orb-4"></div>
+<div class="ambient-layer" aria-hidden="true">
+  <div class="orb orb-1" id="orb1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -1322,11 +1332,12 @@
 <!--Zoho Campaigns Web-Optin Form Ends Here-->
   </div>
 
-  <p class="hero-note">
-    <span class="hero-note-item">No credit card required</span>
-    <span class="hero-note-item">Free tier available at launch</span>
-    <span class="hero-note-item">Founding discount locked in at signup</span>
-  </p>
+  <p class="hero-note hero-note--desktop">No credit card required &nbsp;·&nbsp; Free tier available at launch &nbsp;·&nbsp; Founding discount locked in at signup</p>
+  <ul class="hero-note hero-note--mobile">
+    <li>No credit card required</li>
+    <li>Free tier available at launch</li>
+    <li>Founding discount locked in at signup</li>
+  </ul>
 
   <div class="hero-stats">
     <div class="stat-item">
@@ -1730,12 +1741,16 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(el => statObserver.observe(el));
 
-  /* ── SUBTLE MOUSE PARALLAX ON ORB ── */
-  document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 30;
-    const y = (e.clientY / window.innerHeight - 0.5) * 30;
-    document.getElementById('orb1').style.transform = `translate(${x}px, ${y}px)`;
-  });
+  /* ── SUBTLE MOUSE PARALLAX ON ORB (desktop only) ── */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      const orb = document.getElementById('orb1');
+      if (!orb) return;
+      const x = (e.clientX / window.innerWidth - 0.5) * 30;
+      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      orb.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  }
 
   /* ── SCROLL TO WAITLIST ── */
   function scrollToWaitlist() {
