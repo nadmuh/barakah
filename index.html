@@ -203,6 +203,7 @@
     }
     .hero-sub-line { display:block; }
     .hero-sub-line + .hero-sub-line { margin-top:0.35em; }
+    .hero-sub-short { display: none; }
 
     .hero-waitlist {
       width:100%; max-width:460px;
@@ -210,6 +211,13 @@
       animation: fadeUp 1s .3s ease both;
       position:relative; z-index:2;
       scroll-margin-top: calc(var(--nav-h) + 1rem);
+    }
+    .hero-waitlist #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1.25rem 1.1rem 1.1rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     }
 
     .hero-form {
@@ -689,35 +697,38 @@
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.9rem;
+      grid-template-columns: 1fr;
+      gap: 0.85rem;
       width: 100%;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield {
       margin: 0;
       min-width: 0;
+      grid-column: 1 / -1;
     }
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000021"] { grid-column: 1 / -1; } /* Row 1: Email */
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000023"] { grid-column: 1 / 2; }  /* Row 2: First */
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000025"] { grid-column: 2 / 3; }  /* Row 2: Last */
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000029"] { grid-column: 1 / -1; } /* Row 3: Phone */
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 [name="SIGNUP_FORM_LABEL"] {
-      display: block;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: nowrap;
+      gap: 0.15rem;
       color: var(--text);
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
       font-family: 'JetBrains Mono', monospace;
       padding-left: 2px;
+      white-space: nowrap;
+      line-height: 1.2;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 [name="SIGNUP_FORM_LABEL"] [name="SIGNUP_REQUIRED"] {
       color: var(--red);
       position: static;
-      display: inline-block;
-      margin-left: 1px;
-      transform: translateY(-0.25em);
+      display: inline;
+      margin-left: 0;
+      transform: none;
       line-height: 1;
+      flex-shrink: 0;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="email"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="text"] {
@@ -893,7 +904,7 @@
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin {
-      max-height: 130px;
+      max-height: 320px;
       opacity: 1;
       transform: translateY(0) scale(1);
       transform-origin: top center;
@@ -960,6 +971,14 @@
     ::-webkit-scrollbar-thumb:hover { background:rgba(201,168,76,0.3); }
 
     /* ── RESPONSIVE ── */
+    @media (min-width: 901px) {
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+      }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000023"] { grid-column: 1 / 2; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000025"] { grid-column: 2 / 3; }
+    }
     @media (max-width:900px) {
       .problem { grid-template-columns:1fr; gap:3rem; }
       .features-grid { grid-template-columns:1fr 1fr; }
@@ -968,18 +987,45 @@
       .steps-connector { display:none; }
       .nav-links { display:none; }
       .hamburger { display:flex; }
+      .hero {
+        min-height: auto;
+        justify-content: flex-start;
+        padding: calc(var(--nav-h) + 1.25rem) 1.25rem 2.5rem;
+        overflow: visible;
+      }
+      h1 { font-size: clamp(1.85rem, 7.5vw, 2.75rem); margin-bottom: 0.85rem; line-height: 1.12; }
+      .hero-sub { margin-bottom: 1rem; font-size: 0.92rem; line-height: 1.65; }
+      .hero-sub-full { display: none; }
+      .hero-sub-short { display: block; }
+      .tag { margin-bottom: 1rem; font-size: 0.62rem; padding: 0.35rem 0.9rem; }
+      .hero-stats { margin-top: 2rem; gap: 1.25rem; }
+      .hero-note { margin-top: 0.75rem; font-size: 0.68rem; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { width: 100%; display: block; text-align: center; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { display: none; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin {
+        max-height: none !important;
+      }
     }
     @media (max-width:560px) {
       .features-grid { grid-template-columns:1fr; }
       .tiers-grid { grid-template-columns:1fr; max-width:400px; }
       .steps-wrap { grid-template-columns:1fr; }
-      .hero-sub { max-width:100%; padding:0 0.5rem; }
-      .hero-waitlist { max-width:100%; padding:0 0.25rem; }
-      .hero-stats { gap:1.5rem; flex-wrap:wrap; justify-content:center; }
+      .hero { padding: calc(var(--nav-h) + 0.85rem) 1rem 2rem; }
+      .hero-waitlist { max-width:100%; }
+      .hero-waitlist #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm {
+        padding: 0.9rem 0.85rem 0.85rem;
+        border-radius: 12px;
+      }
+      .hero-stats { gap:1.25rem; flex-wrap:wrap; justify-content:center; }
       footer { flex-direction:column; text-align:center; }
       .footer-links { justify-content:center; }
-      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv { grid-template-columns: 1fr; }
-      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #customForm { padding: 1rem; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 [name="SIGNUP_FORM_LABEL"] { font-size: 0.65rem; letter-spacing: 0.05em; }
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="email"],
+      #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 input[type="text"] {
+        font-size: 16px;
+        padding: 0.72rem 0.8rem;
+      }
     }
   </style>
   <script>
@@ -1055,8 +1101,9 @@
   <h1>Trade <em>Smarter.</em><br>Learn Faster.</h1>
 
   <p class="hero-sub">
-    <span class="hero-sub-line">The AI-powered platform that turns your trade history into a personalized roadmap for improvement.</span>
-    <span class="hero-sub-line">Analytics, education, and mentorship — all in one place.</span>
+    <span class="hero-sub-line hero-sub-full">The AI-powered platform that turns your trade history into a personalized roadmap for improvement.</span>
+    <span class="hero-sub-line hero-sub-full">Analytics, education, and mentorship — all in one place.</span>
+    <span class="hero-sub-line hero-sub-short">AI-powered analytics, education, and mentorship — all in one place.</span>
   </p>
 
   <div class="hero-waitlist" id="waitlist">
@@ -1105,7 +1152,6 @@
 				<div name="" changeid="" changename="">
 					<div id="imgBlock" name="LOGO_DIV" logo="true"></div>
 				</div>
-				<br>
 				<div id="signupMainDiv" name="SIGNUPFORM" changeid="SIGNUPFORM" changename="SIGNUPFORM">
 					<div>
 						<div style="position:relative;">
@@ -1701,6 +1747,9 @@
       zohoRoot.classList.remove('zoho-success-collapsed');
       zohoRoot.classList.remove('zoho-collapsed');
     };
+
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    if (isMobile) zohoRoot.classList.add('zoho-mobile');
 
     const syncReveal = () => {
       if (zohoRoot.classList.contains('zoho-success-collapsed')) return;
