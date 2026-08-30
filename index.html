@@ -222,6 +222,7 @@
 
     .hero-waitlist {
       width:100%; max-width:460px;
+      margin-top: 1rem;
       margin-bottom:.35rem;
       animation: fadeUp 1s .3s ease both;
       position:relative; z-index:2;
@@ -294,7 +295,7 @@
       gap: 0.35rem;
       width: 100%;
       max-width: 460px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.35rem;
       padding: 0.85rem 1rem;
       border-radius: 10px;
       background: linear-gradient(135deg, rgba(201,168,76,0.14), rgba(201,168,76,0.05));
@@ -331,7 +332,7 @@
 
     .form-email-note-wrap {
       grid-column: 1 / -1;
-      margin-top: 0.15rem;
+      margin-top: 0;
       max-height: 40px;
       opacity: 1;
       overflow: hidden;
@@ -761,16 +762,24 @@
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #SIGNUP_DESCRIPTION {
       display: none;
     }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #errorMsgDiv + div {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0.85rem;
+      gap: 1rem;
       width: 100%;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield {
       margin: 0;
       min-width: 0;
       grid-column: 1 / -1;
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield > div:empty {
+      display: none;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 [name="SIGNUP_FORM_LABEL"] {
       display: flex;
@@ -865,14 +874,14 @@
       margin-right: auto;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT {
-      margin-top: 0.6rem;
+      margin: 0;
       color: var(--text-muted);
       font-size: 0.72rem;
       letter-spacing: 0.05em;
       font-family: 'JetBrains Mono', monospace;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin {
-      margin-top: 0.8rem;
+      margin-top: 0;
       width: auto;
       display: inline-block;
       border: none;
@@ -1046,7 +1055,7 @@
     @media (min-width: 901px) {
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0.9rem;
+        gap: 1rem;
       }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000023"] { grid-column: 1 / 2; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[fieldid="1634770000000000025"] { grid-column: 2 / 3; }
