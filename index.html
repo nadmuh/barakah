@@ -766,6 +766,7 @@
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      transition: gap .35s ease;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffieldsdiv {
       display: grid;
@@ -963,10 +964,13 @@
       background: rgba(255,77,106,0.08) !important;
     }
     /* Progressive reveal: email first, then rest */
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #errorMsgDiv + div {
+      gap: 0;
+    }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zoho-extra-fields-wrap,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
-    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT + div {
-      display: none;
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
       max-height: 0;
       opacity: 0;
       overflow: hidden;
@@ -976,6 +980,10 @@
       border-width: 0 !important;
       pointer-events: none;
       transform: translateY(-10px) scale(.98);
+    }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zoho-extra-fields-wrap {
+      gap: 0;
+      margin-top: -0.35rem;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffieldsdiv {
       gap: 0.35rem;
@@ -988,6 +996,12 @@
       grid-template-columns: 1fr;
       gap: 1rem;
       width: 100%;
+      max-height: 520px;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transform-origin: top center;
+      overflow: hidden;
+      transition: max-height .52s cubic-bezier(.2,.8,.2,1), opacity .35s ease, transform .45s cubic-bezier(.2,.8,.2,1), margin .3s ease, gap .3s ease;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT,
@@ -1014,10 +1028,12 @@
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { transition-delay: .16s; }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { transition-delay: .2s; }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zoho-extra-fields-wrap,
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffield[data-zoho-extra="true"],
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #REQUIRED_FIELD_TEXT,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed #zcWebOptin {
       transition-delay: 0s;
     }
+    #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639:not(.zoho-collapsed) .zoho-extra-fields-wrap { transition-delay: .02s; }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .zcsffieldsdiv,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed .zoho-extra-fields-wrap,
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-success-collapsed #REQUIRED_FIELD_TEXT,
