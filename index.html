@@ -329,21 +329,17 @@
       line-height: 1.45;
     }
 
-    .hero-note {
-      margin-top:1rem;
-      max-width:460px;
-      width:100%;
-      font-family:'JetBrains Mono',monospace; font-size:.72rem;
-      color:var(--text-muted); letter-spacing:.06em;
-      line-height:1.5;
-      text-align:center;
-      animation: fadeUp 1s .4s ease both;
+    .form-email-note-wrap {
+      grid-column: 1 / -1;
+      margin-top: 0.15rem;
     }
-    .hero-note--mobile { display:none; list-style:none; padding:0; margin-top:1rem; max-width:460px; width:100%; }
-    .hero-note--mobile li {
-      font-family:'JetBrains Mono',monospace; font-size:.65rem;
-      color:var(--text-muted); letter-spacing:.04em; line-height:1.45;
+    .form-email-note {
+      font-family:'JetBrains Mono',monospace;
+      font-size:.68rem;
+      color:var(--text-muted);
+      letter-spacing:.05em;
       text-align:center;
+      line-height:1.4;
     }
 
     .hero-stats {
@@ -962,7 +958,7 @@
       transform: translateY(-10px) scale(.98);
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639.zoho-collapsed .zcsffieldsdiv {
-      max-height: 7.5rem;
+      max-height: 9rem;
       overflow: hidden;
     }
     #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 .zcsffield[data-zoho-extra="true"],
@@ -1067,14 +1063,6 @@
       .hero-stats { margin-top: 2rem; gap: 1.25rem; }
       .hero-offer { margin-bottom: 0.85rem; padding: 0.75rem 0.85rem; }
       .hero-offer-sub { font-size: 0.72rem; }
-      .hero-note--desktop { display:none; }
-      .hero-note--mobile {
-        display:flex;
-        flex-direction:column;
-        gap:0.2rem;
-        align-items:center;
-        animation: fadeUp 1s .4s ease both;
-      }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #zcWebOptin { width: 100%; display: block; text-align: center; }
       #sf3zac646cc79c3760aba5db5c4d29d57eebe3e484f89957306e7d0e94ae62c60639 #REQUIRED_FIELD_TEXT { display: none; }
     }
@@ -1253,6 +1241,9 @@
 													</div>
 												<div></div>
 												</div>
+												<div class="form-email-note-wrap">
+													<p class="form-email-note">No credit card required</p>
+												</div>
 												<div class="zcsffield " fieldid="1634770000000000023">
 													<div>
 														<div name="SIGNUP_FORM_LABEL">First Name&nbsp;<span name="SIGNUP_REQUIRED">*</span></div>
@@ -1331,11 +1322,6 @@
 </div>
 <!--Zoho Campaigns Web-Optin Form Ends Here-->
   </div>
-
-  <p class="hero-note hero-note--desktop">No credit card required</p>
-  <ul class="hero-note hero-note--mobile">
-    <li>No credit card required</li>
-  </ul>
 
   <div class="hero-stats">
     <div class="stat-item">
