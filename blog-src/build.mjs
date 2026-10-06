@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { articles } from './articles.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = 'https://barakahtrading.co';
+const SITE = 'https://www.barakahtrading.co';
 const GA_ID = 'G-D0GBQRS0CN';
 
 const INDEX_TITLE = 'Barakah Blogs | Prop Firm Trading Guides & Discipline';

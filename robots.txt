@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://barakahtrading.co/sitemap.xml
+Sitemap: https://www.barakahtrading.co/sitemap.xml
