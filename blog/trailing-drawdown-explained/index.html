@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Trailing Drawdown Explained for Prop Traders | Barakah</title>
+  <meta name="description" content="How trailing drawdown really works, the misreads that get prop firm traders disqualified, and how to track your floor without guesswork."/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+  <meta name="theme-color" content="#0B0E14"/>
+  <link rel="canonical" href="https://barakahtrading.co/blog/trailing-drawdown-explained/"/>
+  <link rel="alternate" type="application/rss+xml" title="Barakah Blogs" href="https://barakahtrading.co/blog/feed.xml"/>
+  <link rel="icon" type="image/png" id="favicon" href="/favicon-dark.png"/>
+  <meta property="og:site_name" content="Barakah Trading"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:title" content="Trailing Drawdown Explained for Prop Traders | Barakah"/>
+  <meta property="og:description" content="How trailing drawdown really works, the misreads that get prop firm traders disqualified, and how to track your floor without guesswork."/>
+  <meta property="og:url" content="https://barakahtrading.co/blog/trailing-drawdown-explained/"/>
+  <meta property="og:image" content="https://barakahtrading.co/blog/images/trailing-drawdown-explained.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:alt" content="Barakah Trading header graphic for the article Trailing Drawdown Explained"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Trailing Drawdown Explained for Prop Traders | Barakah"/>
+  <meta name="twitter:description" content="How trailing drawdown really works, the misreads that get prop firm traders disqualified, and how to track your floor without guesswork."/>
+  <meta name="twitter:image" content="https://barakahtrading.co/blog/images/trailing-drawdown-explained.png"/>
+  <meta name="twitter:image:alt" content="Barakah Trading header graphic for the article Trailing Drawdown Explained"/>
+  <meta property="article:published_time" content="2026-10-05"/>
+  <meta property="article:modified_time" content="2026-10-05"/>
+  <meta property="article:section" content="Prop Firm Guides"/>
+  <meta name="keywords" content="trailing drawdown explained"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://barakahtrading.co/blog/trailing-drawdown-explained/"},"headline":"Trailing Drawdown Explained: Why Traders Get Caught Off Guard","description":"How trailing drawdown really works, the misreads that get prop firm traders disqualified, and how to track your floor without guesswork.","image":["https://barakahtrading.co/blog/images/trailing-drawdown-explained.png"],"datePublished":"2026-10-05","dateModified":"2026-10-05","author":{"@type":"Organization","name":"Barakah Trading","url":"https://barakahtrading.co/"},"publisher":{"@type":"Organization","name":"Barakah Trading","url":"https://barakahtrading.co/","logo":{"@type":"ImageObject","url":"https://barakahtrading.co/blog/images/barakah-logo.png"}},"articleSection":"Prop Firm Guides","keywords":"trailing drawdown explained","wordCount":678,"inLanguage":"en-US"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a trailing drawdown?","acceptedAnswer":{"@type":"Answer","text":"A trailing drawdown is a loss limit that moves up as your account sets new highs, then locks once it reaches the starting balance. Your risk cushion shrinks as you become more successful, until the rule stops trailing."}},{"@type":"Question","name":"What is the difference between a static and a trailing drawdown?","acceptedAnswer":{"@type":"Answer","text":"A static drawdown sets one fixed floor for the life of the account. A trailing drawdown rises with your balance (or, on some account types, your intraday unrealized equity) as it sets new highs."}},{"@type":"Question","name":"When is a trailing drawdown account most at risk?","acceptedAnswer":{"@type":"Answer","text":"Right after your best day. The floor has moved up the most, your margin for error is thinnest, and confidence tempts you to size up."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://barakahtrading.co/"},{"@type":"ListItem","position":2,"name":"Blogs","item":"https://barakahtrading.co/blog/"},{"@type":"ListItem","position":3,"name":"Trailing Drawdown Explained: Why Traders Get Caught Off Guard","item":"https://barakahtrading.co/blog/trailing-drawdown-explained/"}]}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/blog/blog.css"/>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0GBQRS0CN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-D0GBQRS0CN');
+  </script>
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="ambient-layer" aria-hidden="true"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+
+<nav id="nav" aria-label="Primary">
+  <a href="/" class="logo" aria-label="Barakah home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62" fill="none" width="34" height="34" style="flex-shrink:0" aria-hidden="true">
+      <defs><mask id="cm"><circle cx="31" cy="31" r="23" fill="white"/><circle cx="40" cy="25" r="19" fill="black"/></mask></defs>
+      <circle cx="31" cy="31" r="23" fill="#C9A84C" mask="url(#cm)"/>
+      <polyline points="8,52 14,44 20,48 28,34 34,38 46,20" stroke="#EAE8F0" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polygon points="52,11 51,23 41,17" fill="#EAE8F0"/>
+    </svg>
+    <span class="logo-wordmark">Barakah</span>
+  </a>
+  <div class="nav-links">
+    <a href="/#features">Features</a>
+    <a href="/#how">How It Works</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/blog/" class="active" aria-current="page">Blogs</a>
+    <a href="/#waitlist" class="nav-cta">Join Waitlist</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#features">Features</a>
+  <a href="/#how">How It Works</a>
+  <a href="/#pricing">Pricing</a>
+  <a href="/blog/" class="active">Blogs</a>
+  <a href="/#waitlist" class="m-cta">Join Waitlist</a>
+</div>
+
+<main id="main">
+  <article>
+    <div class="wrap-narrow">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blogs</a></li><li><span aria-current="page">Trailing Drawdown Explained: Why Traders Get Caught Off Guard</span></li></ol></nav>
+      <header class="article-head">
+        <span class="eyebrow">Prop Firm Guides</span>
+        <h1>Trailing Drawdown Explained: Why Traders Get Caught Off Guard</h1>
+        <p class="lede">A trailing drawdown moves up as you win. Traders who treat it like a fixed limit get disqualified by a floor they did not know had moved. Here is how it works and how to track it.</p>
+        <div class="byline">
+          <span>By <strong>Barakah Trading</strong></span>
+          <span>Published <time datetime="2026-10-05"><strong>October 5, 2026</strong></time></span>
+          <span><strong>3 min</strong> read</span>
+        </div>
+      </header>
+      <figure class="hero-img">
+        <img src="/blog/images/trailing-drawdown-explained.png" alt="Barakah Trading header graphic for the article Trailing Drawdown Explained" width="1200" height="630" fetchpriority="high" decoding="async"/>
+      </figure>
+      <nav class="toc" aria-label="In this article">
+        <h2>In this article</h2>
+        <ol><li><a href="#what-trailing-actually-means">What &quot;Trailing&quot; Actually Means</a></li><li><a href="#why-traders-get-caught-off-guard">Why Traders Get Caught Off Guard</a></li><li><a href="#the-behavioral-trap-hiding-inside-the-rule">The Behavioral Trap Hiding Inside the Rule</a></li><li><a href="#how-to-trade-a-trailing-drawdown-account-with-discipline">How to Trade a Trailing Drawdown Account With Discipline</a></li><li><a href="#how-barakah-closes-this-gap">How Barakah Closes This Gap</a></li><li><a href="#the-bottom-line">The Bottom Line</a></li><li><a href="#faq">Frequently Asked Questions</a></li></ol>
+      </nav>
+      <div class="prose">
+<p>MyFundedFutures (MFFU) has grown fast among futures prop traders, and like most futures evaluation firms, <strong>its core risk rule is a trailing drawdown.</strong> Traders coming from static-drawdown firms or stock trading often misread how it moves, and that single misunderstanding accounts for a large share of avoidable disqualifications.</p>
+<h2 id="what-trailing-actually-means">What &quot;Trailing&quot; Actually Means</h2>
+<p>A <strong>static drawdown</strong> sets one fixed floor for the life of the account. A <strong>trailing drawdown</strong> moves up as your account's balance (or, in some account types, your unrealized equity intraday) sets new highs, until it eventually locks once it reaches the starting balance. The practical effect: <em>your risk cushion shrinks the more successful you are</em>, right up until the rule stops trailing.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col"></th><th scope="col">Static drawdown</th><th scope="col">Trailing drawdown</th></tr></thead><tbody><tr><th scope="row">Floor</th><td>Fixed for the life of the account</td><td>Rises as your balance sets new highs</td></tr><tr><th scope="row">Locks?</th><td>Always fixed</td><td>Locks once it reaches the starting balance</td></tr><tr><th scope="row">Common mistake</th><td>None: the floor never moves</td><td>Tracking balance instead of the floor</td></tr></tbody></table></div>
+<aside class="callout callout-note"><span class="label">Note</span>Evaluation details, thresholds, and whether the trail is based on end-of-day balance or intraday unrealized equity vary by account type and change periodically. Always confirm current terms directly on <a href="https://help.myfundedfutures.com/en/articles/8348565-max-eod-trailing" target="_blank" rel="noopener noreferrer">MyFundedFutures' official help center</a>.</aside>
+<h2 id="why-traders-get-caught-off-guard">Why Traders Get Caught Off Guard</h2>
+<ul><li>They <strong>track account balance, not the trailing floor itself</strong>, and don't realize how close the two have become.</li><li>They <strong>assume the drawdown is static</strong> because that's what a previous firm used.</li><li>They let an <strong>open, unrealized gain swing back</strong> against them without realizing it counted toward their high-water mark.</li><li>They <strong>increase size right after a strong day</strong>, not accounting for how much the floor moved up with it.</li></ul>
+<h2 id="the-behavioral-trap-hiding-inside-the-rule">The Behavioral Trap Hiding Inside the Rule</h2>
+<p>Trailing drawdown rules punish a very specific behavior pattern: <strong>taking on more risk right after success.</strong> A trader who just had their best day of the month feels confident and sizes up, exactly when their trailing floor has moved closest to their balance and their margin for error is thinnest. This is a timing problem as much as a risk-management problem, and it's nearly impossible to catch by just glancing at a P&amp;L number.</p>
+<aside class="callout callout-key"><span class="label">Key takeaway</span>The riskiest moment in a trailing-drawdown account isn't after a loss. It's right after your best day, when the floor has moved up the most and confidence is highest.</aside>
+<h2 id="how-to-trade-a-trailing-drawdown-account-with-discipline">How to Trade a Trailing Drawdown Account With Discipline</h2>
+<ol><li><strong>Know your current trailing floor at all times</strong>, not just your account balance.</li><li><strong>Build a personal rule for reducing size, not increasing it,</strong> after a strong day.</li><li><strong>Lock in gains by closing positions</strong> rather than holding unrealized profit that still counts toward your high-water mark.</li><li><strong>Review your sizing pattern weekly</strong>, specifically looking at how size changed in the 24 hours after a winning day.</li></ol>
+<p>This is the exact pattern (sizing up right after success) that a manual spreadsheet almost never catches in time, because the trader reviewing it is the same person whose confidence caused the problem. Our <a href="/blog/best-trade-journal-for-prop-firm-traders/">guide to choosing a prop firm trade journal</a> covers what to look for instead.</p>
+<h2 id="how-barakah-closes-this-gap">How Barakah Closes This Gap</h2>
+<p>Barakah pulls your trailing drawdown floor <strong>directly from your connected broker data</strong> instead of relying on balance figures you enter yourself, so the floor stays accurate even as it moves. Its Behavioral Discipline Engine flags a post-win sizing shift the same day it happens, independent of how confident the trader feels in the moment, which is exactly the blind spot that causes most trailing-drawdown disqualifications.</p>
+<p>That's the difference between a journal that logs what already happened and one that catches the pattern while there's still time to change it.</p>
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p>MyFundedFutures' trailing drawdown isn't harder to pass than a static one. It's just a different shape of risk, and most failures come from treating it like a rule you check occasionally rather than a floor you track continuously. <strong>Traders who track the floor itself, not just their balance, pass more consistently.</strong> New to futures evaluations? Start with the <a href="/blog/futures-prop-firm-evaluation-guide/">futures prop firm evaluation guide</a>.</p>
+        <h2 id="faq">Frequently Asked Questions</h2>
+        <div class="faq">
+          <div class="faq-item"><h3>What is a trailing drawdown?</h3><p>A trailing drawdown is a loss limit that moves up as your account sets new highs, then locks once it reaches the starting balance. Your risk cushion shrinks as you become more successful, until the rule stops trailing.</p></div>
+          <div class="faq-item"><h3>What is the difference between a static and a trailing drawdown?</h3><p>A static drawdown sets one fixed floor for the life of the account. A trailing drawdown rises with your balance (or, on some account types, your intraday unrealized equity) as it sets new highs.</p></div>
+          <div class="faq-item"><h3>When is a trailing drawdown account most at risk?</h3><p>Right after your best day. The floor has moved up the most, your margin for error is thinnest, and confidence tempts you to size up.</p></div>
+        </div>
+      </div>
+      <section class="cta-box" aria-labelledby="cta-h">
+  <h2 id="cta-h">Ready to see <span>why</span>, not just what?</h2>
+  <p>Barakah's Behavioral Discipline Engine is built for traders working through funded-account evaluations. Join the waitlist for <strong>founding-member pricing</strong> before public launch.</p>
+  <a class="btn-gold" href="/#waitlist">Join the Waitlist</a>
+  <p class="disclaimer">Educational content only. Barakah Trading does not execute trades or provide financial advice. Trading involves risk of loss.</p>
+</section>
+      <aside class="sources" aria-labelledby="sources-h">
+        <h2 id="sources-h">Sources &amp; further reading</h2>
+        <ul>
+          <li><a href="https://help.myfundedfutures.com/en/articles/8348565-max-eod-trailing" target="_blank" rel="noopener noreferrer">MyFundedFutures — Max EOD Trailing</a> <span class="note">— official explanation of the firm's trailing drawdown</span></li>
+          <li><a href="https://apextraderfunding.com/help-center/" target="_blank" rel="noopener noreferrer">Apex Trader Funding — Help Center</a> <span class="note">— official evaluation and trailing threshold rules</span></li>
+        </ul>
+        <p class="disclaimer">Rules, thresholds and account sizes at prop firms change periodically. Always confirm current terms on the firm's official pages. Published October 5, 2026.</p>
+      </aside>
+    </div>
+  </article>
+  <section class="related" aria-labelledby="related-h">
+    <div class="wrap">
+      <h2 id="related-h">Keep reading</h2>
+      <div class="post-grid">
+<article class="post-card">
+  <a class="thumb" href="/blog/futures-prop-firm-evaluation-guide/" tabindex="-1" aria-hidden="true"><img src="/blog/images/futures-prop-firm-evaluation-guide.png" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
+  <div class="body">
+    <div class="post-meta"><span class="cat">Prop Firm Guides</span><span class="dot"></span><time datetime="2026-10-05">October 5, 2026</time><span class="dot"></span><span>3 min read</span></div>
+    <h2><a href="/blog/futures-prop-firm-evaluation-guide/">Futures Prop Firm Evaluations Explained — Full Guide</a></h2>
+    <p>How futures prop firm evaluations work: account sizes, trailing drawdown, consistency rules, and the behavioral mistakes that fail most attempts.</p>
+    <span class="read-more">Read article <span aria-hidden="true">→</span></span>
+  </div>
+</article>
+<article class="post-card">
+  <a class="thumb" href="/blog/how-to-stop-revenge-trading/" tabindex="-1" aria-hidden="true"><img src="/blog/images/how-to-stop-revenge-trading.png" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
+  <div class="body">
+    <div class="post-meta"><span class="cat">Trading Discipline</span><span class="dot"></span><time datetime="2026-10-05">October 5, 2026</time><span class="dot"></span><span>3 min read</span></div>
+    <h2><a href="/blog/how-to-stop-revenge-trading/">How to Stop Revenge Trading as a Prop Firm Trader</a></h2>
+    <p>Revenge trading is the fastest way to fail a prop firm challenge. Learn what causes it, why willpower fails, and the system that works.</p>
+    <span class="read-more">Read article <span aria-hidden="true">→</span></span>
+  </div>
+</article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a href="/" class="logo" aria-label="Barakah home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62 62" fill="none" width="28" height="28" style="flex-shrink:0" aria-hidden="true">
+      <defs><mask id="cmf"><circle cx="31" cy="31" r="23" fill="white"/><circle cx="40" cy="25" r="19" fill="black"/></mask></defs>
+      <circle cx="31" cy="31" r="23" fill="#C9A84C" mask="url(#cmf)"/>
+      <polyline points="8,52 14,44 20,48 28,34 34,38 46,20" stroke="#EAE8F0" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <polygon points="52,11 51,23 41,17" fill="#EAE8F0"/>
+    </svg>
+    <span class="logo-wordmark">Barakah</span>
+  </a>
+  <p>© 2026 Barakah Trading LLC. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="/blog/">Blogs</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+</footer>
+<script src="/blog/blog.js" defer></script>
+</body>
+</html>
