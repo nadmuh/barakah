@@ -4,6 +4,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articles } from './articles.mjs';
+import { ICONS } from './social-icons.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://www.barakahtrading.co';
@@ -164,12 +165,20 @@ const nav = () => `<body>
   <a href="/#waitlist" class="m-cta">Join Waitlist</a>
 </div>`;
 
+// Add [label, url] pairs (labels from social-icons.mjs) to show icons in every blog footer,
+// e.g. ['Instagram', 'https://www.instagram.com/yourhandle/']. Empty = no icons shown.
+export const SOCIALS = [];
+const socialsHtml = () => SOCIALS.length
+  ? `<div class="footer-socials">${SOCIALS.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${name}" title="${name}">${ICONS[name]}</a>`).join('')}</div>`
+  : '';
+
 const footer = () => `<footer>
   <a href="/" class="logo" aria-label="Barakah home">
     ${logoSvg(28, 'cmf')}
     <span class="logo-wordmark">Barakah</span>
   </a>
   <p>© 2026 Barakah Trading LLC. All rights reserved.</p>
+  ${socialsHtml()}
   <div class="footer-links">
     <a href="/blog/">Blogs</a>
     <a href="#">Privacy</a>
@@ -185,7 +194,7 @@ const footer = () => `<footer>
 const crumbs = items => `<nav class="crumbs" aria-label="Breadcrumb"><ol>${items.map((c, i) => i === items.length - 1 ? `<li><span aria-current="page">${esc(c[0])}</span></li>` : `<li><a href="${c[1]}">${esc(c[0])}</a></li>`).join('')}</ol></nav>`;
 const crumbLd = items => jsonLd({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c[0], item: c[1].startsWith('http') ? c[1] : SITE + c[1] })) });
 
-const card = a => `<article class="post-card">
+const card = a => `<article class="post-card" data-category="${slugify(a.category)}">
   <a class="thumb" href="/blog/${a.slug}/" tabindex="-1" aria-hidden="true"><img src="/blog/images/${a.image}" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
   <div class="body">
     <div class="post-meta"><span class="cat">${esc(a.category)}</span><span class="dot"></span><time datetime="${a.published}">${fmtDate(a.published)}</time><span class="dot"></span><span>${readMins(a)} min read</span></div>
@@ -195,10 +204,12 @@ const card = a => `<article class="post-card">
   </div>
 </article>`;
 
-const ctaBox = (h, p) => `<section class="cta-box" aria-labelledby="cta-h">
+const ctaBox = (h, p) => `<section class="cta-section" aria-labelledby="cta-h">
+  <div class="cta-glow"></div>
+  <div class="cta-glow-cyan"></div>
   <h2 id="cta-h">${h}</h2>
   <p>${p}</p>
-  <a class="btn-gold" href="/#waitlist">Join the Waitlist</a>
+  <a class="btn-join-waitlist" href="/#waitlist">Join the Waitlist</a>
   <p class="disclaimer">Educational content only. Barakah Trading does not execute trades or provide financial advice. Trading involves risk of loss.</p>
 </section>`;
 
@@ -206,6 +217,7 @@ const ctaBox = (h, p) => `<section class="cta-box" aria-labelledby="cta-h">
 function buildIndex() {
   const sorted = [...articles].sort((a, b) => b.published.localeCompare(a.published));
   const canonical = `${SITE}/blog/`;
+  const categories = [...new Set(sorted.map(a => a.category))];
   const ld = [
     jsonLd({ '@context': 'https://schema.org', '@type': 'Blog', '@id': canonical, name: 'Barakah Blogs', description: INDEX_DESC, url: canonical, inLanguage: 'en-US', publisher: { '@type': 'Organization', name: 'Barakah Trading', url: SITE + '/', logo: { '@type': 'ImageObject', url: `${SITE}/blog/images/barakah-logo.png` } }, blogPost: sorted.map(a => ({ '@type': 'BlogPosting', headline: a.title, url: urlOf(a), datePublished: a.published, image: imgUrl(a), description: a.description })) }),
     jsonLd({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: sorted.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: urlOf(a), name: a.title })) }),
@@ -221,12 +233,24 @@ function buildIndex() {
       <h1>Barakah <em>Blogs</em></h1>
       <p>Prop firm guides, drawdown explainers and trading discipline playbooks, written trader-to-trader to help you protect your funded account.</p>
     </header>
-    <div class="post-grid">
+    <div class="filter-bar">
+      <div>
+        <label for="categoryFilter">Filter by type</label>
+        <span class="select-wrap">
+          <select id="categoryFilter" class="filter-select">
+            <option value="all">All topics</option>
+${categories.map(c => `            <option value="${slugify(c)}">${esc(c)}</option>`).join('\n')}
+          </select>
+        </span>
+      </div>
+      <p class="filter-count" id="filterCount" aria-live="polite">Showing ${sorted.length} articles</p>
+    </div>
+    <div class="post-grid" id="postGrid">
 ${sorted.map(card).join('\n')}
     </div>
-    ${ctaBox('Trade smarter. <span>Learn faster.</span>', 'Join the waitlist for early access and founding-member pricing before public launch.')}
-    <div style="height:5rem"></div>
+    <p class="filter-empty" id="filterEmpty">No articles in this category yet.</p>
   </div>
+  ${ctaBox('Trade smarter. <span>Learn faster.</span>', 'Join the waitlist for early access and founding-member pricing before public launch.')}
 </main>
 
 ` + footer();
@@ -280,7 +304,6 @@ ${bodyHtml}
 ${a.faq.map(([q, ans]) => `          <div class="faq-item"><h3>${esc(q)}</h3><p>${inline(ans)}</p></div>`).join('\n')}
         </div>
       </div>
-      ${ctaBox('Ready to see <span>why</span>, not just what?', 'Barakah\'s Behavioral Discipline Engine is built for traders working through funded-account evaluations. Join the waitlist for <strong>founding-member pricing</strong> before public launch.')}
       <aside class="sources" aria-labelledby="sources-h">
         <h2 id="sources-h">Sources &amp; further reading</h2>
         <ul>
@@ -290,6 +313,7 @@ ${a.sources.map(([name, url, note]) => `          <li><a href="${url}" target="_
       </aside>
     </div>
   </article>
+  ${ctaBox('Ready to see <span>why</span>, not just what?', 'Barakah\'s Behavioral Discipline Engine is built for traders working through funded-account evaluations. Join the waitlist for <strong>founding-member pricing</strong> before public launch.')}
   <section class="related" aria-labelledby="related-h">
     <div class="wrap">
       <h2 id="related-h">Keep reading</h2>

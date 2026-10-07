@@ -31,3 +31,35 @@
   setFav(mq);
   if (mq.addEventListener) mq.addEventListener('change', setFav);
 })();
+
+/* Blog index: filter articles by type (dropdown), shareable via ?type=slug */
+(function () {
+  var select = document.getElementById('categoryFilter');
+  var grid = document.getElementById('postGrid');
+  if (!select || !grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.post-card'));
+  var count = document.getElementById('filterCount');
+  var empty = document.getElementById('filterEmpty');
+
+  function apply(value, updateUrl) {
+    var shown = 0;
+    cards.forEach(function (card) {
+      var match = value === 'all' || card.getAttribute('data-category') === value;
+      card.hidden = !match;
+      if (match) shown++;
+    });
+    if (count) count.textContent = 'Showing ' + shown + (shown === 1 ? ' article' : ' articles');
+    if (empty) empty.style.display = shown ? 'none' : 'block';
+    if (updateUrl && window.history && history.replaceState) {
+      history.replaceState(null, '', value === 'all' ? location.pathname : location.pathname + '?type=' + value);
+    }
+  }
+
+  select.addEventListener('change', function () { apply(select.value, true); });
+
+  var wanted = new URLSearchParams(location.search).get('type');
+  if (wanted && Array.prototype.some.call(select.options, function (o) { return o.value === wanted; })) {
+    select.value = wanted;
+    apply(wanted, false);
+  }
+})();

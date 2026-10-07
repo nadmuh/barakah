@@ -84,8 +84,22 @@
       <h1>Barakah <em>Blogs</em></h1>
       <p>Prop firm guides, drawdown explainers and trading discipline playbooks, written trader-to-trader to help you protect your funded account.</p>
     </header>
-    <div class="post-grid">
-<article class="post-card">
+    <div class="filter-bar">
+      <div>
+        <label for="categoryFilter">Filter by type</label>
+        <span class="select-wrap">
+          <select id="categoryFilter" class="filter-select">
+            <option value="all">All topics</option>
+            <option value="trade-journals">Trade Journals</option>
+            <option value="prop-firm-guides">Prop Firm Guides</option>
+            <option value="trading-discipline">Trading Discipline</option>
+          </select>
+        </span>
+      </div>
+      <p class="filter-count" id="filterCount" aria-live="polite">Showing 4 articles</p>
+    </div>
+    <div class="post-grid" id="postGrid">
+<article class="post-card" data-category="trade-journals">
   <a class="thumb" href="/blog/best-trade-journal-for-prop-firm-traders/" tabindex="-1" aria-hidden="true"><img src="/blog/images/best-trade-journal-for-prop-firm-traders.png" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
   <div class="body">
     <div class="post-meta"><span class="cat">Trade Journals</span><span class="dot"></span><time datetime="2026-10-05">October 5, 2026</time><span class="dot"></span><span>4 min read</span></div>
@@ -94,7 +108,7 @@
     <span class="read-more">Read article <span aria-hidden="true">→</span></span>
   </div>
 </article>
-<article class="post-card">
+<article class="post-card" data-category="prop-firm-guides">
   <a class="thumb" href="/blog/futures-prop-firm-evaluation-guide/" tabindex="-1" aria-hidden="true"><img src="/blog/images/futures-prop-firm-evaluation-guide.png" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
   <div class="body">
     <div class="post-meta"><span class="cat">Prop Firm Guides</span><span class="dot"></span><time datetime="2026-10-05">October 5, 2026</time><span class="dot"></span><span>3 min read</span></div>
@@ -103,7 +117,7 @@
     <span class="read-more">Read article <span aria-hidden="true">→</span></span>
   </div>
 </article>
-<article class="post-card">
+<article class="post-card" data-category="prop-firm-guides">
   <a class="thumb" href="/blog/trailing-drawdown-explained/" tabindex="-1" aria-hidden="true"><img src="/blog/images/trailing-drawdown-explained.png" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
   <div class="body">
     <div class="post-meta"><span class="cat">Prop Firm Guides</span><span class="dot"></span><time datetime="2026-10-05">October 5, 2026</time><span class="dot"></span><span>3 min read</span></div>
@@ -112,7 +126,7 @@
     <span class="read-more">Read article <span aria-hidden="true">→</span></span>
   </div>
 </article>
-<article class="post-card">
+<article class="post-card" data-category="trading-discipline">
   <a class="thumb" href="/blog/how-to-stop-revenge-trading/" tabindex="-1" aria-hidden="true"><img src="/blog/images/how-to-stop-revenge-trading.png" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
   <div class="body">
     <div class="post-meta"><span class="cat">Trading Discipline</span><span class="dot"></span><time datetime="2026-10-05">October 5, 2026</time><span class="dot"></span><span>3 min read</span></div>
@@ -122,14 +136,16 @@
   </div>
 </article>
     </div>
-    <section class="cta-box" aria-labelledby="cta-h">
+    <p class="filter-empty" id="filterEmpty">No articles in this category yet.</p>
+  </div>
+  <section class="cta-section" aria-labelledby="cta-h">
+  <div class="cta-glow"></div>
+  <div class="cta-glow-cyan"></div>
   <h2 id="cta-h">Trade smarter. <span>Learn faster.</span></h2>
   <p>Join the waitlist for early access and founding-member pricing before public launch.</p>
-  <a class="btn-gold" href="/#waitlist">Join the Waitlist</a>
+  <a class="btn-join-waitlist" href="/#waitlist">Join the Waitlist</a>
   <p class="disclaimer">Educational content only. Barakah Trading does not execute trades or provide financial advice. Trading involves risk of loss.</p>
 </section>
-    <div style="height:5rem"></div>
-  </div>
 </main>
 
 <footer>
@@ -143,6 +159,7 @@
     <span class="logo-wordmark">Barakah</span>
   </a>
   <p>© 2026 Barakah Trading LLC. All rights reserved.</p>
+  
   <div class="footer-links">
     <a href="/blog/">Blogs</a>
     <a href="#">Privacy</a>
