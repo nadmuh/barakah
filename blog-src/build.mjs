@@ -1,10 +1,11 @@
 // Generates the static blog: blog/index.html, blog/<slug>/index.html, blog/feed.xml, sitemap.xml, robots.txt.
 // No dependencies. Run from the site root:  node blog-src/build.mjs
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articles } from './articles.mjs';
 import { ICONS } from './social-icons.mjs';
+import { SOCIALS } from './socials.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://www.barakahtrading.co';
@@ -165,9 +166,6 @@ const nav = () => `<body>
   <a href="/#waitlist" class="m-cta">Join Waitlist</a>
 </div>`;
 
-// Add [label, url] pairs (labels from social-icons.mjs) to show icons in every blog footer,
-// e.g. ['Instagram', 'https://www.instagram.com/yourhandle/']. Empty = no icons shown.
-export const SOCIALS = [];
 const socialsHtml = () => SOCIALS.length
   ? `<div class="footer-socials">${SOCIALS.map(([name, url]) => `<a href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${name}" title="${name}">${ICONS[name]}</a>`).join('')}</div>`
   : '';
@@ -194,13 +192,21 @@ const footer = () => `<footer>
 const crumbs = items => `<nav class="crumbs" aria-label="Breadcrumb"><ol>${items.map((c, i) => i === items.length - 1 ? `<li><span aria-current="page">${esc(c[0])}</span></li>` : `<li><a href="${c[1]}">${esc(c[0])}</a></li>`).join('')}</ol></nav>`;
 const crumbLd = items => jsonLd({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c[0], item: c[1].startsWith('http') ? c[1] : SITE + c[1] })) });
 
+// One icon per category. Colour per category lives in blog.css ([data-category] --accent).
+const CATEGORY_ICONS = {
+  'Trade Journals': '<path d="M5 4.5A1.5 1.5 0 016.5 3H19v15H6.5A1.5 1.5 0 005 19.5v-15z"/><path d="M5 19.5A1.5 1.5 0 006.5 21H19v-3"/><path d="M9 8h6M9 12h6"/>',
+  'Prop Firm Guides': '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  'Trading Discipline': '<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+};
+const categoryIcon = c => `<svg viewBox="0 0 24 24" aria-hidden="true">${CATEGORY_ICONS[c] || CATEGORY_ICONS['Trade Journals']}</svg>`;
+
 const card = a => `<article class="post-card" data-category="${slugify(a.category)}">
-  <a class="thumb" href="/blog/${a.slug}/" tabindex="-1" aria-hidden="true"><img src="/blog/images/${a.image}" alt="" width="1200" height="630" loading="lazy" decoding="async"/></a>
-  <div class="body">
-    <div class="post-meta"><span class="cat">${esc(a.category)}</span><span class="dot"></span><time datetime="${a.published}">${fmtDate(a.published)}</time><span class="dot"></span><span>${readMins(a)} min read</span></div>
-    <h2><a href="/blog/${a.slug}/">${esc(a.title)}</a></h2>
-    <p>${esc(a.description)}</p>
-    <span class="read-more">Read article <span aria-hidden="true">→</span></span>
+  <div class="card-top"><span class="cat-icon">${categoryIcon(a.category)}</span><span class="cat-label">${esc(a.category)}</span></div>
+  <h2><a href="/blog/${a.slug}/">${esc(a.title)}</a></h2>
+  <p>${esc(a.description)}</p>
+  <div class="card-foot">
+    <div class="post-meta"><time datetime="${a.published}">${fmtDate(a.published)}</time><span class="dot"></span><span>${readMins(a)} min read</span></div>
+    <span class="read-more">Read <span aria-hidden="true">→</span></span>
   </div>
 </article>`;
 
@@ -359,7 +365,20 @@ ${sorted.map(a => `  <item><title>${esc(a.title)}</title><link>${urlOf(a)}</link
 `);
 }
 
+// The hand-written pages (home, contact, thank-you) carry the same social icons between markers,
+// so the links live in one place (socials.mjs). Only the marked block is touched.
+function syncStaticPages() {
+  const block = `<!-- socials:start -->${socialsHtml()}<!-- socials:end -->`;
+  for (const f of ['index.html', 'contact.html', 'thank-you.html']) {
+    const p = join(ROOT, f);
+    const html = readFileSync(p, 'utf8');
+    if (!html.includes('<!-- socials:start -->')) throw new Error(`${f}: socials markers missing`);
+    writeFileSync(p, html.replace(/<!-- socials:start -->[\s\S]*?<!-- socials:end -->/, () => block));
+  }
+}
+
 buildIndex();
+syncStaticPages();
 articles.forEach(buildArticle);
 buildMeta();
 console.log(`Built ${articles.length} articles + index, sitemap.xml, robots.txt, feed.xml`);
