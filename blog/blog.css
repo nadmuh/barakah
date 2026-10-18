@@ -16,6 +16,7 @@
   --text-soft:    #B9BCC9;
   --text-muted:   #5A5E6E;
   --green:        #00E5A0;
+  --violet:       #9B8CFF;
   --red:          #FF4D6A;
   --border:       rgba(255,255,255,0.05);
   --nav-h:        68px;
@@ -283,6 +284,7 @@ footer p { font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: v
 .post-card[data-category="trade-journals"]      { --accent: var(--gold); }
 .post-card[data-category="prop-firm-guides"]    { --accent: var(--cyan); }
 .post-card[data-category="trading-discipline"]  { --accent: var(--green); }
+.post-card[data-category="trading-tools"]       { --accent: var(--violet); }
 .post-card:hover {
   transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent) 50%, transparent); border-top-color: var(--accent);
   box-shadow: 0 14px 40px rgba(0,0,0,.4), 0 0 28px color-mix(in srgb, var(--accent) 14%, transparent);

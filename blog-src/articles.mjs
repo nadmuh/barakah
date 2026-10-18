@@ -273,4 +273,140 @@ Revenge trading costs more funded accounts than bad strategy ever does, and it s
       ['FTMO — Trading Objectives', 'https://ftmo.com/en/trading-objectives/', 'example of daily loss limit rules revenge trading can break'],
     ],
   },
+
+  {
+    slug: 'best-prop-firm-trading-tools-2026',
+    title: 'Best Prop Firm Trading Tools in 2026 (Ranked)',
+    metaTitle: 'Best Prop Firm Trading Tools in 2026 (Ranked) | Barakah',
+    description: 'The prop firm trading tools worth using in 2026, ranked by category: charting, journals, broker analytics and behavioral AI, and where each one fits.',
+    keyword: 'best prop firm trading tools 2026',
+    category: 'Trading Tools',
+    published: '2026-10-18',
+    image: 'best-prop-firm-trading-tools-2026.png',
+    imageAlt: 'Barakah Trading header graphic for the article Best Prop Firm Trading Tools in 2026, Ranked',
+    lede: 'No single tool does everything a prop firm trader needs. This is a ranked breakdown by category, so you can see what each tool is built for and fill the gaps in your own process.',
+    related: ['best-trade-journal-for-prop-firm-traders', 'what-is-a-trading-discipline-score'],
+    body: `
+There's no single tool that does everything a prop firm trader needs, and **most traders end up stitching together three or four** before they find a setup that works. This isn't a "best overall" list. It's a ranked breakdown *by category*, so you can see what each tool is actually built for and pick the ones that fill the gaps in your own process.
+
+| Category | Examples | Best for | Where it falls short |
+| --- | --- | --- | --- |
+| Charting & backtesting | TradingView, MetaTrader, QuantConnect | Reading the market and testing a strategy | Doesn't know your drawdown limit |
+| Trade journals | TraderSync, Edgewonk, Tradervue | Logging trades, win rate and R-multiple | Not built around an evaluation's rule set |
+| Broker-native analytics | Robinhood, TD Ameritrade, IBKR | Your personal account, at no extra cost | Often can't see your funded account |
+| Behavioral AI & discipline coaching | Tradezella, **Barakah Trading** | Understanding *why* you made each decision | Newest category; Barakah is pre-launch |
+
+## Charting & Backtesting
+
+**TradingView** remains the default for charting and social-layer features. It's free at the entry tier, has the widest symbol coverage, and nearly every prop firm's platform exports to it. **MetaTrader** still dominates on the forex side specifically because so many firms run on MT4/MT5 natively. **QuantConnect** is the serious option if you want to systematically backtest a strategy with real historical data instead of eyeballing a chart, but it has a real learning curve.
+
+## Trade Journals
+
+**TraderSync, Edgewonk, and Tradervue** are the established names here, and all three do a competent job logging trades and calculating win rate, R-multiple, and basic performance stats. Their limitation for prop firm traders specifically: *none of them were built around an evaluation's rule set.* You can see your P&L, but you're on your own figuring out how close you are to a daily loss limit or a trailing drawdown floor. Our full comparison is in [the best trade journals for prop firm traders](/blog/best-trade-journal-for-prop-firm-traders/).
+
+> NOTE: A general-purpose trade journal tracks what happened. A prop-firm-aware one tracks what happened *against the specific rules you'll get disqualified for breaking*. Those are different products wearing the same label.
+
+## Broker-Native Analytics
+
+**Robinhood, TD Ameritrade, and IBKR** all ship decent built-in performance tabs, and they're free since you're already paying spread or commission. The catch: most funded accounts run through a separate prop firm platform entirely, so your broker-native dashboard often can't see the account you're actually being evaluated on. *Useful for your personal capital, close to useless for your combine.*
+
+## Behavioral AI & Discipline Coaching
+
+This category barely existed a few years ago and it's the fastest-growing part of the space now. **Tradezella** has pushed into AI-assisted journaling and is the closest existing competitor here. **Barakah Trading** is building further into this category specifically for funded and evaluation accounts: tracking your trailing drawdown and daily loss limit automatically from real broker data, and flagging the behavioral patterns (revenge trading, post-win oversizing) that actually cause most disqualifications, *not after the fact but while there's still time to correct course.* See [how to stop revenge trading](/blog/how-to-stop-revenge-trading/) and [what a trading discipline score is](/blog/what-is-a-trading-discipline-score/) for the thinking behind it.
+
+Here is the difference between the four layers, in one line each:
+
+- A **journal** shows you what happened
+- A **charting platform** shows you the market
+- A **broker-native dashboard** shows you your personal account
+- A **behavioral layer** is the only one that shows you *why* you made the decision you made
+
+## How to Actually Build Your Stack
+
+1. **Pick one charting/backtesting tool and stick with it.** Switching platforms mid-combine costs more time than it saves.
+2. **Use a journal that's at minimum tracking your specific firm's daily loss limit and max drawdown**, not just generic P&L.
+3. **Don't rely on broker-native analytics for a funded account** unless your broker and your prop firm are literally the same platform.
+4. **If you've been disqualified once already for a pattern you didn't catch in time, a behavioral layer stops being optional.**
+
+> NOTE: Barakah does not execute trades or provide financial advice. It reports on your own trading data.
+
+## The Bottom Line
+
+Most of these tools solve one piece of the problem well and the rest of it not at all. Charting tools don't know your drawdown limit. Journals don't know why you're about to break your own rule. Broker dashboards don't know your combine exists. **Barakah Trading is built to be the layer that connects your real trading behavior to the actual rules you're being evaluated against.**
+`,
+    faq: [
+      ['Do I need more than one trading tool as a prop firm trader?', 'Most traders end up combining three or four: a charting or backtesting platform, a journal, and optionally a behavioral layer. Each solves one piece of the problem, so the goal is to fill the gaps in your own process rather than find a single tool that does everything.'],
+      ['Can broker-native analytics track a funded prop firm account?', 'Often not. Most funded accounts run through a separate prop firm platform, so a broker\'s built-in performance tab usually can\'t see the account you are actually being evaluated on.'],
+      ['What should a trade journal track for a prop firm evaluation?', 'At a minimum, your specific firm\'s daily loss limit and max drawdown, not just generic P&L. A general-purpose journal tracks what happened; a prop-firm-aware one tracks what happened against the rules you can be disqualified for breaking.'],
+    ],
+    sources: [
+      ['TradingView', 'https://www.tradingview.com/', 'charting and social features'],
+      ['MetaTrader 5', 'https://www.metatrader5.com/', 'the platform many forex prop firms run on'],
+      ['QuantConnect', 'https://www.quantconnect.com/', 'systematic backtesting with historical data'],
+      ['TraderSync', 'https://tradersync.com/', 'example of an established trade journal'],
+      ['Edgewonk', 'https://edgewonk.com/', 'example of an established trade journal'],
+      ['Tradervue', 'https://www.tradervue.com/', 'example of an established trade journal'],
+      ['TradeZella', 'https://www.tradezella.com/', 'AI-assisted journaling'],
+    ],
+  },
+
+  {
+    slug: 'what-is-a-trading-discipline-score',
+    title: 'What Is a Trading Discipline Score?',
+    metaTitle: 'What Is a Trading Discipline Score? | Barakah',
+    description: 'A trading discipline score measures how closely you followed your own rules, independent of P&L. See what it tracks and why it matters.',
+    keyword: 'trading discipline score',
+    category: 'Trading Discipline',
+    published: '2026-10-18',
+    image: 'what-is-a-trading-discipline-score.png',
+    imageAlt: 'Barakah Trading header graphic for the article What Is a Trading Discipline Score',
+    lede: 'Ask a trader how their week went and they will quote their P&L. A discipline score puts a number on process instead: what you did, not what the market did.',
+    related: ['how-to-stop-revenge-trading', 'trailing-drawdown-explained'],
+    body: `
+Ask a trader how their week went and they'll tell you their P&L. Ask them how *disciplined* they were and most can't answer with a number, just a feeling, usually wrong in one direction or the other. A **Discipline Score** is an attempt to fix that: a single number that measures how closely your actual trading behavior matched your own stated rules, **separate from whether the market happened to go your way.**
+
+## Why P&L Alone Is a Bad Discipline Signal
+
+A profitable week can hide terrible process: oversized positions that happened to work out, a revenge trade that happened to land, a rule broken with no immediate consequence. A losing week can hide excellent process: a well-sized, well-planned trade that simply didn't work, which is a normal outcome in any sound strategy. If the only number you track is P&L, **you're rewarding luck and punishing discipline roughly as often as the reverse.**
+
+> KEY: P&L tells you what the market did to your account. A Discipline Score tells you what *you* did to your account, and that's the number you actually have control over.
+
+## What a Discipline Score Should Actually Measure
+
+- **Position sizing consistency.** Did your size stay within your own stated risk parameters, win or lose?
+- **Rule adherence.** Did you respect your own stop-loss and profit-target rules, or exit based on emotion?
+- **Behavioral pattern frequency.** How often did a trade show the signature of [revenge trading](/blog/how-to-stop-revenge-trading/) or post-win overconfidence?
+- **Cadence consistency.** Are your best and worst days wildly different in process, or just in outcome?
+
+## Why It Matters More for Prop Firm Traders Specifically
+
+A prop firm evaluation is, underneath the profit target, **a test of whether you can follow a rule set under pressure.** Daily loss limits and [trailing drawdowns](/blog/trailing-drawdown-explained/) don't care how good your strategy is on paper. They only care whether your behavior stayed inside the lines (see [FTMO's trading objectives](https://ftmo.com/en/trading-objectives/) for a real example of those limits). A trader with a mediocre strategy and high discipline passes more evaluations than a trader with a great strategy and low discipline, *because the discipline failure is what actually ends a combine.*
+
+## How Barakah Is Building This
+
+Barakah Trading is developing the Discipline Score as the core number inside its **Behavioral Discipline Engine**, calculated from your real connected trading data rather than self-reported notes, and shown front and center on your dashboard alongside your P&L, not buried in a report you have to go looking for. It's one of the features currently in active development ahead of closed beta, built specifically so it reflects your actual behavior pattern, not just your win rate for the week. Comparing the tools in this space? See [the best prop firm trading tools in 2026](/blog/best-prop-firm-trading-tools-2026/).
+
+> NOTE: Barakah does not execute trades or provide financial advice. A discipline score reports on your own trading behavior; it is not a recommendation to buy or sell anything.
+
+## How to Use the Idea Today
+
+1. **Track your process the same way you track your P&L.** Weekly, not just after a disqualification.
+2. **Separate a bad week caused by variance from a bad week caused by broken discipline.**
+3. **Use a sizing or rule-adherence slip as an early warning**, not something you notice only after it costs an account.
+
+## The Bottom Line
+
+A good week and a disciplined week are not the same thing, and most traders have no way to tell the difference until the disciplined part fails and the account goes with it. **A Discipline Score exists to close that gap**: measuring the thing you actually control, not just the thing the market handed you.
+`,
+    faq: [
+      ['What is a trading discipline score?', 'A trading discipline score is a single number that measures how closely your actual trading behavior matched your own stated rules, separate from whether the market went your way.'],
+      ['What should a discipline score measure?', 'Position sizing consistency, adherence to your own stop-loss and profit-target rules, how often trades show the signature of revenge trading or post-win overconfidence, and how consistent your process is between your best and worst days.'],
+      ['Why isn\'t P&L enough to judge discipline?', 'A profitable week can hide poor process, such as oversized positions that happened to work, and a losing week can hide excellent process. Tracking only P&L rewards luck and punishes discipline roughly as often as the reverse.'],
+      ['Is the Barakah Discipline Score available yet?', 'Not yet. It is in active development ahead of closed beta as part of the Behavioral Discipline Engine. Joining the waitlist gets you early access and founding-member pricing.'],
+    ],
+    sources: [
+      ['FTMO — Trading Objectives', 'https://ftmo.com/en/trading-objectives/', 'example of the daily loss and maximum loss rules traders are evaluated against'],
+      ['MyFundedFutures — Max EOD Trailing', 'https://help.myfundedfutures.com/en/articles/8348565-max-eod-trailing', 'example of a trailing drawdown rule'],
+    ],
+  },
 ];

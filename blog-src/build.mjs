@@ -197,6 +197,7 @@ const CATEGORY_ICONS = {
   'Trade Journals': '<path d="M5 4.5A1.5 1.5 0 016.5 3H19v15H6.5A1.5 1.5 0 005 19.5v-15z"/><path d="M5 19.5A1.5 1.5 0 006.5 21H19v-3"/><path d="M9 8h6M9 12h6"/>',
   'Prop Firm Guides': '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
   'Trading Discipline': '<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  'Trading Tools': '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/>',
 };
 const categoryIcon = c => `<svg viewBox="0 0 24 24" aria-hidden="true">${CATEGORY_ICONS[c] || CATEGORY_ICONS['Trade Journals']}</svg>`;
 
@@ -223,7 +224,8 @@ const ctaBox = (h, p) => `<section class="cta-section" aria-labelledby="cta-h">
 function buildIndex() {
   const sorted = [...articles].sort((a, b) => b.published.localeCompare(a.published));
   const canonical = `${SITE}/blog/`;
-  const categories = [...new Set(sorted.map(a => a.category))];
+  const used = new Set(sorted.map(a => a.category));
+  const categories = [...Object.keys(CATEGORY_ICONS).filter(c => used.has(c)), ...[...used].filter(c => !(c in CATEGORY_ICONS))]; // stable order
   const ld = [
     jsonLd({ '@context': 'https://schema.org', '@type': 'Blog', '@id': canonical, name: 'Barakah Blogs', description: INDEX_DESC, url: canonical, inLanguage: 'en-US', publisher: { '@type': 'Organization', name: 'Barakah Trading', url: SITE + '/', logo: { '@type': 'ImageObject', url: `${SITE}/blog/images/barakah-logo.png` } }, blogPost: sorted.map(a => ({ '@type': 'BlogPosting', headline: a.title, url: urlOf(a), datePublished: a.published, image: imgUrl(a), description: a.description })) }),
     jsonLd({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: sorted.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: urlOf(a), name: a.title })) }),

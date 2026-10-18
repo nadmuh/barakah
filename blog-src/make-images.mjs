@@ -13,7 +13,7 @@ const require = createRequire(import.meta.url);
 const sharp = require(process.env.SHARP_PATH || 'sharp');
 const IMG = join(dirname(fileURLToPath(import.meta.url)), '..', 'blog', 'images');
 
-const GOLD = '#C9A84C', GOLD_LIGHT = '#E8CC7A', CYAN = '#00D4FF', GREEN = '#00E5A0', TEXT = '#EAE8F0';
+const GOLD = '#C9A84C', GOLD_LIGHT = '#E8CC7A', CYAN = '#00D4FF', GREEN = '#00E5A0', VIOLET = '#9B8CFF', TEXT = '#EAE8F0';
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const FONT = 'Arial, Helvetica, sans-serif';
 
@@ -48,6 +48,18 @@ ${rows}${rings}
 <g fill="#0B0E14" stroke="${CYAN}" stroke-width="3.5"><circle cx="900" cy="505" r="8"/><circle cx="1010" cy="465" r="8"/><circle cx="1120" cy="400" r="8"/></g>
 <circle cx="1150" cy="250" r="9" fill="#fff"/>
 <g stroke="${CYAN}" stroke-width="2.5" stroke-linecap="round" fill="none"><line x1="1070" y1="318" x2="1070" y2="410" stroke-dasharray="3 9"/><path d="M1062 402l8 10 8-10"/></g>`,
+  },
+  'Trading Tools': {
+    accent: VIOLET, label: 'TRADING TOOLS',
+    art: () => [0, 1, 2, 3].map(i => {
+      const y = 124 + i * 100, top = i === 0;
+      return `<rect x="790" y="${y}" width="360" height="82" rx="16" fill="${top ? VIOLET : '#fff'}" fill-opacity="${top ? .16 : .045}" stroke="${VIOLET}" stroke-opacity="${top ? .95 : .35}" stroke-width="${top ? 3 : 2}"/>
+<circle cx="838" cy="${y + 41}" r="21" fill="${top ? VIOLET : 'none'}" stroke="${VIOLET}" stroke-width="2.5"/>
+<text x="838" y="${y + 49}" text-anchor="middle" font-family="${FONT}" font-size="22" font-weight="700" fill="${top ? '#0B0E14' : VIOLET}">${i + 1}</text>
+<rect x="878" y="${y + 26}" width="${[190, 150, 120, 90][i]}" height="11" rx="5.5" fill="#fff" fill-opacity=".24"/>
+<rect x="878" y="${y + 47}" width="${[120, 100, 80, 60][i]}" height="8" rx="4" fill="#fff" fill-opacity=".12"/>
+<rect x="1084" y="${y + 30}" width="48" height="22" rx="11" fill="${VIOLET}" fill-opacity="${top ? .85 : .3}"/>`;
+    }).join('\n'),
   },
   'Trading Discipline': {
     accent: GREEN, label: 'TRADING DISCIPLINE',
@@ -90,10 +102,11 @@ ${lines.map((l, i) => `<text x="80" y="${340 + i * 76}" font-family="${FONT}" fo
 const indexArt = {
   accent: GOLD, label: 'THE BARAKAH BLOG',
   art: () => `<g fill="none" stroke="${GOLD}"><circle cx="960" cy="312" r="150" stroke-opacity=".3" stroke-width="2"/><circle cx="960" cy="312" r="210" stroke-opacity=".16" stroke-width="2"/></g>
-<g font-family="${FONT}" font-size="16" font-weight="700" letter-spacing="2">
-  <rect x="770" y="508" width="132" height="34" rx="17" fill="${GOLD}" fill-opacity=".14" stroke="${GOLD}"/><text x="836" y="530" text-anchor="middle" fill="${GOLD}">JOURNALS</text>
-  <rect x="912" y="508" width="112" height="34" rx="17" fill="${CYAN}" fill-opacity=".14" stroke="${CYAN}"/><text x="968" y="530" text-anchor="middle" fill="${CYAN}">GUIDES</text>
-  <rect x="1034" y="508" width="144" height="34" rx="17" fill="${GREEN}" fill-opacity=".14" stroke="${GREEN}"/><text x="1106" y="530" text-anchor="middle" fill="${GREEN}">DISCIPLINE</text>
+<g font-family="${FONT}" font-size="15" font-weight="700" letter-spacing="2">
+  <rect x="706" y="508" width="118" height="34" rx="17" fill="${GOLD}" fill-opacity=".14" stroke="${GOLD}"/><text x="765" y="530" text-anchor="middle" fill="${GOLD}">JOURNALS</text>
+  <rect x="832" y="508" width="100" height="34" rx="17" fill="${CYAN}" fill-opacity=".14" stroke="${CYAN}"/><text x="882" y="530" text-anchor="middle" fill="${CYAN}">GUIDES</text>
+  <rect x="940" y="508" width="132" height="34" rx="17" fill="${GREEN}" fill-opacity=".14" stroke="${GREEN}"/><text x="1006" y="530" text-anchor="middle" fill="${GREEN}">DISCIPLINE</text>
+  <rect x="1080" y="508" width="94" height="34" rx="17" fill="${VIOLET}" fill-opacity=".14" stroke="${VIOLET}"/><text x="1127" y="530" text-anchor="middle" fill="${VIOLET}">TOOLS</text>
 </g>`,
 };
 
